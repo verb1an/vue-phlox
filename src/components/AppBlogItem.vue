@@ -68,36 +68,43 @@ reFormatDate();
         padding: 20px;
         .item__media {
             width: 100%;
-            max-height: 270px;
             border-radius: 25px;
             margin-bottom: 25px;
             cursor: pointer;
             overflow: hidden;
             transition: all 0.4s ease-in-out;
+            background-color: transparent;
+            display: flex;
+            align-items: center;
 
             img {
                 width: 100%;
-                height: 270px;
+                height: auto;
                 overflow: hidden;
                 object-fit: cover;
             }
+            
+            @media (max-width: 767px) {
+                width: auto;
+                margin: 0 20px 20px;
+            }
+
+            @media (max-width: 524px) {
+                margin: 0 0 20px;
+            }
+
         }
 
         .item__info {
             display: flex;
             margin-bottom: 25px;
-
-            .item__info_date {
-                font-size: 16px;
-                font-weight: 400;
-            }
+            font-size: 16px;
+            font-weight: 400;
             
             .item__info_author {
                 display: flex;
                 align-items: center;
-                font-size: 16px;
-                font-weight: 400;
-
+                
                 &::before {
                     content: '';
                     width: 5px;
@@ -108,13 +115,17 @@ reFormatDate();
                     margin: 0 10px;
                 }
             }
+
+            @media (max-width: 1024px) {
+                font-size: 13px;
+            }
         }
 
         .item__header {
             margin-bottom: .5em;
 
             .item__header_title  {
-                font-size: 20px;
+                font-size: 1.1em;
                 font-weight: 700;
                 color: vars.$color-g-text;
 
@@ -126,9 +137,19 @@ reFormatDate();
         }
 
         .item__content {
+            font-size: 16px;
             max-width: 80%;
             font-size: 16px;
             line-height: 1.5;
+
+            @media (max-width: 1024px) {
+                max-width: 100%;
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 524px) {
+            padding: 20px 5px;
         }
     }
 
@@ -137,6 +158,11 @@ reFormatDate();
             box-shadow: 0 0 50px rgba(178,178,178,.76);
             
         }
+    }
+ 
+    @media (max-width: 767px) {
+        width: 100%;
+        max-height: 100%;
     }
 }
 </style>

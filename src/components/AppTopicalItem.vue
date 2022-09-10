@@ -146,6 +146,10 @@ defineProps({
                         width: 410px;
                     }
                 }
+
+                @media (max-width: 1149px) {
+                    overflow: hidden;
+                }
             }
 
             &:hover {

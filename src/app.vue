@@ -2,7 +2,7 @@
     <div class="app-wrapper">
         <app-header />
         <router-view></router-view>
-        <!-- <app-footer /> -->
+        <app-footer />
 
         <transition name="_show-btn-to-up">
             <app-btn v-show="showBtnToUp" class="btn-to-up" @click="toUpDocument" >

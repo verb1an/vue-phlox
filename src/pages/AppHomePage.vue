@@ -88,7 +88,7 @@
                 </div>
             </section>
 
-            <!-- <section class="section catalog">
+            <section class="section catalog">
                 <app-section-header>
                     <template #title> Best Seller Products </template>
                     <template #subtitle> speakerThere are many variations passages </template>
@@ -98,23 +98,15 @@
                         <app-catalog-item v-for="item in catalog" :key="item.id" :item="item" />
                     </div>
                 </div>
-            </section> -->
+            </section>
 
-            <!-- <section class="section sale-2">
+            <section class="section sale-2">
                 <div class="content">
                     <div class="content__row">
-                        <app-fs-viewitem class="fs-item fs-2" :style="'green'">
+                        <app-fs-viewitem class="fs-item fs-2" :style="'green'" :img="'assets/img/fsi-3.png'">
                             <template #sale>20% OFF</template>
                             <template #bg-title>HAPPY<br />HOURSE</template>
                             <template #bg-date>15 Nov To 7 Dec</template>
-
-                            <template #img>
-                                <img
-                                    style="transform: translate(-4%, 10%)"
-                                    src="@/assets/img/fsi-3.png"
-                                    alt="full screen image headphone"
-                                />
-                            </template>
                             <template #pre-title>Beats Solo Air</template>
                             <template #title>Summer Sale</template>
                             <template #desc>Company that's grown from 270 to 480 employees in the last 12 months.</template>
@@ -130,9 +122,9 @@
                         </app-fs-viewitem>
                     </div>
                 </div>
-            </section> -->
+            </section>
 
-            <!-- <section class="section blog__posts">
+            <section class="section blog__posts">
                 <app-section-header>
                     <template #title>Recent News</template>
                     <template #subtitle>There are many variations passages</template>
@@ -142,7 +134,7 @@
                         <app-blog-item v-for="item in blogPosts" :key="item.id" :item="item"></app-blog-item>
                     </div>
                 </div>
-            </section> -->
+            </section>
         </div>
     </div>
 </template>
@@ -158,72 +150,72 @@ export default {
                 img: "https://demo.phlox.pro/shop-digital/wp-content/uploads/sites/127/2019/10/Group_1271-1.png",
                 link: "/shop/headphones",
             },
-            // catalog: [
-            //     {
-            //         id: 1,
-            //         name: "Beats",
-            //         img: "https://demo.phlox.pro/shop-digital/wp-content/uploads/sites/127/2019/09/Group-1272-935x701.jpg",
-            //         price_original: 995,
-            //         price_current: 995,
-            //         sale: 10,
-            //     },
-            //     {
-            //         id: 2,
-            //         name: "Beats",
-            //         img: "https://demo.phlox.pro/shop-digital/wp-content/uploads/sites/127/2019/09/Group-1272-935x701.jpg",
-            //         price_original: 995,
-            //         price_current: 995,
-            //         sale: 10,
-            //     },
-            //     {
-            //         id: 3,
-            //         name: "Beats",
-            //         img: "https://demo.phlox.pro/shop-digital/wp-content/uploads/sites/127/2019/09/Group-1272-935x701.jpg",
-            //         price_original: 995,
-            //         price_current: 995,
-            //         sale: 10,
-            //     },
-            //     {
-            //         id: 4,
-            //         name: "Beats",
-            //         img: "https://demo.phlox.pro/shop-digital/wp-content/uploads/sites/127/2019/09/Group-1272-935x701.jpg",
-            //         price_original: 995,
-            //         price_current: 995,
-            //         sale: 10,
-            //     },
-            //     {
-            //         id: 5,
-            //         name: "Beats",
-            //         img: "https://demo.phlox.pro/shop-digital/wp-content/uploads/sites/127/2019/09/Group-1272-935x701.jpg",
-            //         price_original: 995,
-            //         price_current: 995,
-            //         sale: 10,
-            //     },
-            //     {
-            //         id: 6,
-            //         name: "Beats",
-            //         img: "https://demo.phlox.pro/shop-digital/wp-content/uploads/sites/127/2019/09/Group-1272-935x701.jpg",
-            //         price_original: 995,
-            //         price_current: 995,
-            //         sale: 10,
-            //     },
-            //     {
-            //         id: 7,
-            //         name: "Beats",
-            //         img: "https://demo.phlox.pro/shop-digital/wp-content/uploads/sites/127/2019/09/Group-1272-935x701.jpg",
-            //         price_original: 995,
-            //         price_current: 995,
-            //         sale: 10,
-            //     },
-            //     {
-            //         id: 8,
-            //         name: "Beats",
-            //         img: "https://demo.phlox.pro/shop-digital/wp-content/uploads/sites/127/2019/09/Group-1272-935x701.jpg",
-            //         price_original: 995,
-            //         price_current: 995,
-            //         sale: 10,
-            //     },
-            // ],
+            catalog: [
+                {
+                    id: 1,
+                    name: "Beats",
+                    img: "https://demo.phlox.pro/shop-digital/wp-content/uploads/sites/127/2019/09/Group-1272-935x701.jpg",
+                    price_original: 995,
+                    price_current: 995,
+                    sale: 10,
+                },
+                {
+                    id: 2,
+                    name: "Beats",
+                    img: "https://demo.phlox.pro/shop-digital/wp-content/uploads/sites/127/2019/09/Group-1272-935x701.jpg",
+                    price_original: 995,
+                    price_current: 995,
+                    sale: 10,
+                },
+                {
+                    id: 3,
+                    name: "Beats",
+                    img: "https://demo.phlox.pro/shop-digital/wp-content/uploads/sites/127/2019/09/Group-1272-935x701.jpg",
+                    price_original: 995,
+                    price_current: 995,
+                    sale: 10,
+                },
+                {
+                    id: 4,
+                    name: "Beats",
+                    img: "https://demo.phlox.pro/shop-digital/wp-content/uploads/sites/127/2019/09/Group-1272-935x701.jpg",
+                    price_original: 995,
+                    price_current: 995,
+                    sale: 10,
+                },
+                {
+                    id: 5,
+                    name: "Beats",
+                    img: "https://demo.phlox.pro/shop-digital/wp-content/uploads/sites/127/2019/09/Group-1272-935x701.jpg",
+                    price_original: 995,
+                    price_current: 995,
+                    sale: 10,
+                },
+                {
+                    id: 6,
+                    name: "Beats",
+                    img: "https://demo.phlox.pro/shop-digital/wp-content/uploads/sites/127/2019/09/Group-1272-935x701.jpg",
+                    price_original: 995,
+                    price_current: 995,
+                    sale: 10,
+                },
+                {
+                    id: 7,
+                    name: "Beats",
+                    img: "https://demo.phlox.pro/shop-digital/wp-content/uploads/sites/127/2019/09/Group-1272-935x701.jpg",
+                    price_original: 995,
+                    price_current: 995,
+                    sale: 10,
+                },
+                {
+                    id: 8,
+                    name: "Beats",
+                    img: "https://demo.phlox.pro/shop-digital/wp-content/uploads/sites/127/2019/09/Group-1272-935x701.jpg",
+                    price_original: 995,
+                    price_current: 995,
+                    sale: 10,
+                },
+            ],
             topical: [
                 {
                     id: 1,
@@ -308,44 +300,44 @@ export default {
                     icon: "i-payment",
                 },
             ],
-            // blogPosts: [
-            //     {
-            //         id: 12,
-            //         alias: 'How-to-choose-perfect-gadgets',
-            //         title: "How to choose perfect gadgets",
-            //         img: "assets/img/blog/blog-main-img0012.jpg",
-            //         creation_date: "2019-10-05",
-            //         text: "When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper s",
-            //         author: {
-            //             id: 1,
-            //             name: 'Paul'
-            //         },
-            //     },
-            //     {
-            //         id: 11,
-            //         alias: 'How-to-choose-perfect-gadgets',
-            //         title: "How to choose perfect gadgets",
-            //         img: "assets/img/blog/blog-main-img0011.jpg",
-            //         creation_date: "2019-10-05",
-            //         text: "When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper s",
-            //         author: {
-            //             id: 1,
-            //             name: 'Paul'
-            //         },
-            //     },
-            //     {
-            //         id: 10,
-            //         alias: 'How-to-choose-perfect-gadgets',
-            //         title: "How to choose perfect gadgets",
-            //         img: "assets/img/blog/blog-main-img0010.jpg",
-            //         creation_date: "2019-10-05",
-            //         text: "When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper s",
-            //         author: {
-            //             id: 1,
-            //             name: 'Paul'
-            //         },
-            //     }
-            // ]
+            blogPosts: [
+                {
+                    id: 12,
+                    alias: 'How-to-choose-perfect-gadgets',
+                    title: "How to choose perfect gadgets",
+                    img: "assets/img/blog/blog-main-img0012.jpg",
+                    creation_date: "2019-10-05",
+                    text: "When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper s",
+                    author: {
+                        id: 1,
+                        name: 'Paul'
+                    },
+                },
+                {
+                    id: 11,
+                    alias: 'How-to-choose-perfect-gadgets',
+                    title: "How to choose perfect gadgets",
+                    img: "assets/img/blog/blog-main-img0011.jpg",
+                    creation_date: "2019-10-05",
+                    text: "When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper s",
+                    author: {
+                        id: 1,
+                        name: 'Paul'
+                    },
+                },
+                {
+                    id: 10,
+                    alias: 'How-to-choose-perfect-gadgets',
+                    title: "How to choose perfect gadgets",
+                    img: "assets/img/blog/blog-main-img0010.jpg",
+                    creation_date: "2019-10-05",
+                    text: "When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper s",
+                    author: {
+                        id: 1,
+                        name: 'Paul'
+                    },
+                }
+            ]
         };
     },
 };
@@ -540,6 +532,10 @@ export default {
         padding: 25px 0;
         display: flex;
         flex-wrap: wrap;
+
+        @media (max-width: 767px) {
+            justify-content: center;
+        }
     }
 }
 .section.blog__posts{
@@ -549,6 +545,7 @@ export default {
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-wrap: wrap;
         }
     }
 }

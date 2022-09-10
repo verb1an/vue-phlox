@@ -49,8 +49,8 @@ defineProps({
     },
     img: {
         type: String,
-        required: true
-    }
+        required: true,
+    },
 });
 </script>
 
@@ -219,29 +219,31 @@ defineProps({
             left: 50%;
             transform: translate(-60%, -50%);
             width: 100%;
-            max-width: 1120px;
-
-            @media (max-width: 1475px) {
-                max-width: 1000px;
-            }
+            max-width: 750px;
 
             @media (max-width: 1275px) {
-                max-width: 900px;
+                max-width: 650px;
             }
 
             @media (max-width: 1024px) {
-                max-width: 850px;
-                transform: translate(-60%, -70%);
+                max-width: 500px;
+                transform: translate(-70%, -70%);
             }
 
             @media (max-width: 767px) {
+                max-width: 500px;
+                top: 0;
+                transform: translate(-47%, -50%);
+            }
+
+            @media (max-width: 499px) {
                 max-width: 100%;
                 top: 0;
                 transform: translate(-47%, -50%);
             }
         }
 
-        img{
+        img {
             width: 100%;
         }
     }

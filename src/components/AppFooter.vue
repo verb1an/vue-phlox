@@ -136,14 +136,31 @@ let label = ref('');
 
                     &:first-child {
                         justify-content: start;
+
+                        @media (max-width: 767px) {
+                            justify-content: center;
+                        }
                     }
                     &:last-child {
                         justify-content: flex-end;
+
+                        @media (max-width: 767px) {
+                            justify-content: center;
+                        }
                     }
 
                     &:hover {
                         opacity: 1;
                     }
+
+                    @media (max-width: 767px) {
+                        height: auto;
+                        margin: 60px 0;
+                    }
+                }
+
+                @media (max-width: 767px) {
+                    flex-direction: column;
                 }
             }
         }
@@ -152,21 +169,46 @@ let label = ref('');
        
         .content {
             padding: 7% 2% 5%;
-
             .content__row {
                 display: flex;
                 align-items: flex-start;
                 justify-content: space-between;
+                flex-wrap: wrap;
 
                 .content__col {
                     width: 18%;
 
                     &:first-child {
                         width: 24%;
+
+                        @media (max-width: 1024px) {
+                            width: 50%;
+                        }
+
+                        @media (max-width: 767px) {
+                            width: 100%;
+                        }
                     }
 
                     &:last-child {
                         width: 40%;
+
+                        @media (max-width: 1024px) {
+                            width: 50%;
+                        }
+
+                        @media (max-width: 767px) {
+                            width: 100%;
+                        }
+                    }
+
+                    @media (max-width: 1024px) {
+                        width: 50%;
+                        margin-bottom: 20px;
+                    }
+
+                    @media (max-width: 767px) {
+                        width: 100%;
                     }
                 }
 
@@ -262,6 +304,12 @@ let label = ref('');
                         }
                     }
                 }
+
+                
+            }
+
+            @media (max-width: 1024px) {
+                padding: 7% 5% 5%;
             }
         }
     }
@@ -275,9 +323,23 @@ let label = ref('');
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
+
+                span {
+                    @media (max-width: 767px) {
+                        margin-bottom: 20px;
+                    }  
+                }
+
+                @media (max-width: 767px) {
+                    flex-direction: column;
+                    text-align: center;
+                }
+            }
+
+            @media (max-width: 767px) {
+                padding: 30px 0 0;
             }
         }
-        
     }
 }
 </style>

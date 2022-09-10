@@ -48,10 +48,8 @@ defineProps({
 <style lang="scss" scoped>
 @use "@/assets/scss/vars";
 .app_product_item {
-    padding: 5px;
+    padding: 5px 20px 25px 0;
     width: 25%;
-    padding-right: 20px;
-    padding-bottom: 25px;
 
     .item__wrapper {
         position: relative;
@@ -69,6 +67,10 @@ defineProps({
             img {
                 width: 100%;
                 height: auto;
+            }
+
+            @media (max-width: 1024px) {
+                max-height: 360px;
             }
         }
 
@@ -133,18 +135,17 @@ defineProps({
             position: absolute;
             top: 0;
             left: 0;
-            margin: 20px;
-            font-size: 20px;
+            margin: 15px;
+            font-size: 18px;
             font-weight: 700;
             color: vars.$color-g-white;
             background-color: vars.$color-g-primary;
-            height: 60px;
-            width: 60px;
-            border-radius: 30px;
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 5px;
             &::before {
                 content: "-";
             }
@@ -164,6 +165,22 @@ defineProps({
                 }
             }
         }
+    }
+
+    @media (max-width: 1024px) {
+        width: 50%;
+    }
+
+    @media (max-width: 767px) {
+        width: 65%;
+        padding: 0;
+        padding-bottom: 20px;
+        margin-bottom: 40px;
+    }
+
+    @media (max-width: 525px) {
+        width: 100%;
+        padding: 0 10px 20px;
     }
 }
 </style>
