@@ -1,0 +1,137 @@
+/* prettier-ignore */
+@font-face {
+    font-family: "Montserrat";
+    src: url("@/assets/fonts/Montserrat-Light.ttf") format("truetype"),
+        url("@/assets/fonts/Montserrat-Light.woff") format("woff"),
+        url("@/assets/fonts/Montserrat-Light.woff2") format("woff2"),
+        url("@/assets/fonts/Montserrat-Light.svg") format("svg"),
+        url("@/assets/fonts/Montserrat-Light.eot") format("embedded-opentype");
+    font-weight: 300;
+}
+
+/* prettier-ignore */
+@font-face {
+    font-family: "Montserrat";
+    src: url("@/assets/fonts/Montserrat-Regular.ttf") format("truetype"),
+        url("@/assets/fonts/Montserrat-Regular.woff") format("woff"),
+        url("@/assets/fonts/Montserrat-Regular.woff2") format("woff2"),
+        url("@/assets/fonts/Montserrat-Regular.svg") format("svg"),
+        url("@/assets/fonts/Montserrat-Regular.eot") format("embedded-opentype");
+    font-weight: 400;
+}
+/* prettier-ignore */
+@font-face {
+    font-family: "Montserrat";
+    src: url("@/assets/fonts/Montserrat-Medium.ttf") format("truetype"),
+        url("@/assets/fonts/Montserrat-Medium.woff")format("woff"),
+        url("@/assets/fonts/Montserrat-Medium.woff2") format("woff2"),
+        url("@/assets/fonts/Montserrat-Medium.svg") format("svg"),
+        url("@/assets/fonts/Montserrat-Medium.eot") format("embedded-opentype");
+    font-weight: 500;
+}
+/* prettier-ignore */
+@font-face {
+    font-family: "Montserrat";
+    src: url("@/assets/fonts/Montserrat-Bold.ttf") format("truetype"),
+        url("@/assets/fonts/Montserrat-Bold.woff") format("woff"),
+        url("@/assets/fonts/Montserrat-Bold.woff2") format("woff2"),
+        url("@/assets/fonts/Montserrat-Bold.svg") format("svg"),
+        url("@/assets/fonts/Montserrat-Bold.eot") format("embedded-opentype");
+    font-weight: 700;
+}
+/* prettier-ignore */
+@font-face {
+    font-family: "Montserrat";
+    src: url("@/assets/fonts/Montserrat-Black.ttf") format("truetype"),
+        url("@/assets/fonts/Montserrat-Black.woff") format("woff"),
+        url("@/assets/fonts/Montserrat-Black.woff2") format("woff2"),
+        url("@/assets/fonts/Montserrat-Black.svg") format("svg"),
+        url("@/assets/fonts/Montserrat-Black.eot") format("embedded-opentype");
+    font-weight: 900;
+}
+/* prettier-ignore */
+@font-face {
+    font-family: "phlox";
+    src: url("@/assets/icons/phlox.eot?522azt");
+    src: url("@/assets/icons/phlox.eot?522azt#iefix") format("embedded-opentype"),
+        url("@/assets/icons/phlox.ttf?522azt") format("truetype"),
+        url("@/assets/icons/phlox.woff?522azt") format("woff"),
+        url("@/assets/icons/phlox.svg?522azt#phlox") format("svg");
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+/* prettier-ignore */
+@font-face {
+    font-family: 'phlox-social';
+    src:  url('@/assets/icons/phlox-social.eot?8kozea');
+    src:  url('@/assets/icons/phlox-social.eot?8kozea#iefix') format('embedded-opentype'),
+      url('@/assets/icons/phlox-social.ttf?8kozea') format('truetype'),
+      url('@/assets/icons/phlox-social.woff?8kozea') format('woff'),
+      url('@/assets/icons/phlox-social.svg?8kozea#phlox-social') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+[class^="i-"],
+[class*=" i-"],
+[class^="social-i"],
+[class*=" social-i"] {
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="i-"],
+[class*=" i-"] {
+    font-family: "phlox" !important;
+}
+
+[class^="social-i"],
+[class*=" social-i"] {
+    font-family: "phlox-social" !important;
+}
+
+.i-star-regular:before {
+    content: "\e900";
+}
+.i-star-solid:before {
+    content: "\e901";
+}
+.i-cart:before {
+    content: "\e902";
+}
+.i-angle:before {
+    content: "\e90b";
+}
+.i-arrow-up:before {
+    content: "\e904";
+}
+.i-arrow-right:before {
+    content: "\e903";
+}
+.i-close:before {
+    content: "\e909";
+}
+.i-search:before {
+    content: "\e90f";
+}
+
+.social-i-instagram:before {
+    content: "\e900";
+}
+.social-i-github:before {
+    content: "\e902";
+}
+.social-i-telegram:before {
+    content: "\e903";
+}
+.social-i-vk:before {
+    content: "\e904";
+}
