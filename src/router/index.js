@@ -12,47 +12,76 @@ const routes = [
         component: HomePage,
         name: 'Home',
         meta: {
-            title: "Home - Phlox Digital Shop"
+            title: "Home"
         }
     },
     {
-        path: '/shop',
+        path: '/shop/',
         component: CatalogPage,
         name: 'Shop',
         meta: {
-            title: "Shop - Phlox Digital Shop"
+            title: "Shop",
+            // ! Need final this idea or think up something else or delete
+            breadcrumb: [
+                {name: "Home"}
+            ]
         }
     },
     {
-        path: '/about-us',
+        path: '/shop/:category',
+        component: CatalogPage,
+        name: 'Category',
+        meta: {
+            title: "Category",
+            breadcrumb: [
+                {name: "Home", path: "Home"},
+                {name: "Product", path: "Shop"}
+            ]
+        }
+    },
+    {
+        path: '/shop/:category/:subcategory',
+        component: CatalogPage,
+        name: 'Subcategory',
+        meta: {
+            title: "Category",
+            breadcrumb: [
+                {name: "Home", path: "Home"},
+                {name: "Product", path: "Shop"},
+                {name: "Category", path: "Category"}
+            ]
+        }
+    },
+    {
+        path: '/about-us/',
         component: AboutPage,
         name: 'About',
         meta: {
-            title: "About Us - Phlox Digital Shop"
+            title: "About Us"
         }
     },
     {
-        path: '/blog',
+        path: '/blog/',
         component: BlogPage,
         name: 'Blog',
         meta: {
-            title: "Blog - Phlox Digital Shop"
+            title: "Blog"
         }
     },
     {
-        path: '/contact-us',
+        path: '/contact-us/',
         component: ContactPage,
         name: 'Contact',
         meta: {
-            title: "Contact Us - Phlox Digital Shop"
+            title: "Contact Us"
         }
     },
     {
-        path: '/cart',
+        path: '/cart/',
         component: CartPage,
         name: 'Cart',
         meta: {
-            title: "Cart - Phlox Digital Shop"
+            title: "Cart"
         }
     }
 ]
@@ -64,9 +93,8 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     const metaData = to.matched.slice().reverse().find(r => r.meta && r.meta.title);
-    // console.log(title);
     if (metaData) {
-        document.title = metaData.meta.title;
+        document.title = metaData.meta.title + " - Phlox Digital Shop";
     }
     next();
 })

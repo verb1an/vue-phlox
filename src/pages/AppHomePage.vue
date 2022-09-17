@@ -148,7 +148,7 @@ export default {
                 title: "Wireless",
                 subtitle: "Headphone",
                 img: "https://demo.phlox.pro/shop-digital/wp-content/uploads/sites/127/2019/10/Group_1271-1.png",
-                link: "/shop/headphones",
+                link: "/shop/headphones/",
             },
             catalog: [
                 {
@@ -341,6 +341,12 @@ export default {
         };
     },
 };
+</script>
+<script setup>
+import { onUpdated } from 'vue';
+onUpdated(() => {
+    console.log(123);
+})
 </script>
 
 <style lang="scss" scoped>

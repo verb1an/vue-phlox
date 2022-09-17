@@ -5,25 +5,58 @@
         <app-footer />
 
         <transition name="_show-btn-to-up">
-            <app-btn v-show="showBtnToUp" class="btn-to-up" @click="toUpDocument" >
+            <app-btn v-show="showBtnToUp" class="btn-to-up" @click="toUpDocument">
                 <app-icon class="icon_arrow" :icon="'i-arrow-up'" :style="'font-size: 15px;'" />
             </app-btn>
         </transition>
+
+        <!-- <app-popap :show="showHelloPopap" @popap:close="showHelloPopap = false">
+            <template #title>
+                <span>Hi, everyone!</span>
+            </template>
+            <template #text>
+                <p>This project is only a free interpretaion of the <a href="">demo.phlox</a> website and is not intended for commercial use</p>
+            </template>
+            <template #btn>
+                <span>Ok</span>
+            </template>
+            <template #media>
+                <div class="media__wrapper" id="helloPopapChart"></div>
+            </template>
+        </app-popap> -->
     </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
+import { MakeChart } from '@/hooks/makeChart';
+
 const showBtnToUp = ref(false);
+const showHelloPopap = ref(true);
+
 window.addEventListener("scroll", () => {
-    window.pageYOffset > 700
-        ? (showBtnToUp.value = true)
-        : (showBtnToUp.value = false);
+    window.pageYOffset > 700 ? (showBtnToUp.value = true) : (showBtnToUp.value = false);
 });
 
 const toUpDocument = () => {
     window.scrollTo(0, 0);
 };
+
+// onMounted(() => {
+//     const elements = [
+//         10, 20, 20
+//     ];
+//     const colors = [
+//         '#f94144', '#577590', 'green'
+//     ]
+//     const mc = new MakeChart(`#helloPopapChart`, {
+//         count: 50,
+//         elements,
+//         colors
+//     });
+//     mc.create()
+// })
+
 </script>
 
 <style lang="scss">
@@ -55,7 +88,7 @@ const toUpDocument = () => {
         position: fixed;
         bottom: 0;
         right: 0;
-        margin: 50px 100px;
+        margin: 2% 4%;
         border-radius: 50%;
         border: 1px solid #000;
         width: 40px;
@@ -112,7 +145,7 @@ const toUpDocument = () => {
 
         &._show-btn-to-up-enter-active,
         &._show-btn-to-up-leave-active {
-            transition: all .5s ease;
+            transition: all 0.5s ease;
         }
 
         &._show-btn-to-up-enter-from,

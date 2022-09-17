@@ -1,5 +1,9 @@
 import AppHeader from '@/components/AppHeader'
 import AppFooter from '@/components/AppFooter'
+import AppSiteTitle from '@/components/AppSiteTitle'
+import AppMenuCatalog from '@/components/AppMenuCatalog'
+
+import AppPopap from '@/components/AppPopap'
 
 import AppSectionHeader from '@/components/AppSectionHeader'
 import AppFSViewItem from '@/components/AppFSViewItem'
@@ -18,6 +22,10 @@ import AppIcon from '@/components/UI/AppIcon'
 export default [
     AppHeader,
     AppFooter, 
+    AppSiteTitle,
+    AppMenuCatalog,
+
+    AppPopap,
 
     AppSectionHeader,
     AppFSViewItem,

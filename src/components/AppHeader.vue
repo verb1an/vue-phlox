@@ -14,32 +14,32 @@
                                     <app-icon :icon="'i-close'"></app-icon>
                                 </app-btn>
                                 <app-menu-link
-                                    :class="$route.path == '/' ? 'current' : ''"
+                                    :class="currentUrlPath == '' ? 'current' : ''"
                                     :link="'/'"
                                     @click="toggleMenu()"
                                     >Home</app-menu-link
                                 >
                                 <app-menu-link
-                                    :class="$route.path == '/shop' ? 'current' : ''"
-                                    :link="'/shop'"
+                                    :class="currentUrlPath == 'shop' ? 'current' : ''"
+                                    :link="'/shop/'"
                                     @click="toggleMenu()"
                                     >Shop</app-menu-link
                                 >
                                 <app-menu-link
-                                    :class="$route.path == '/about-us' ? 'current' : ''"
-                                    :link="'/about-us'"
+                                    :class="currentUrlPath == 'about-us' ? 'current' : ''"
+                                    :link="'/about-us/'"
                                     @click="toggleMenu()"
                                     >About Us</app-menu-link
                                 >
                                 <app-menu-link
-                                    :class="$route.path == '/blog' ? 'current' : ''"
-                                    :link="'/blog'"
+                                    :class="currentUrlPath == 'blog' ? 'current' : ''"
+                                    :link="'/blog/'"
                                     @click="toggleMenu()"
                                     >Blog</app-menu-link
                                 >
                                 <app-menu-link
-                                    :class="$route.path == '/contact-us' ? 'current' : ''"
-                                    :link="'/contact-us'"
+                                    :class="currentUrlPath == 'contact-us' ? 'current' : ''"
+                                    :link="'/contact-us/'"
                                     @click="toggleMenu()"
                                     >Contact Us</app-menu-link
                                 >
@@ -86,9 +86,13 @@ export default {
 
 <script setup>
 import { ref } from "vue";
+import { useRouter } from "vue-router";
+
+const router = new useRouter();
 
 const deviceWidth = ref(window.innerWidth);
 const showMenu = ref(false);
+const currentUrlPath = ref('/');
 
 const toggleMenu = (show = false) => {
     showMenu.value = show;
@@ -98,6 +102,11 @@ const toggleMenu = (show = false) => {
 window.addEventListener("resize", () => {
     deviceWidth.value = window.innerWidth;
 });
+
+router.beforeEach((to, from, next) => {
+    currentUrlPath.value = to.path.split('/')[1]; // <!-- ? [1] because, path start '/', after split first el is empty -->
+    next();
+})
 </script>
 
 <style lang="scss" scoped>

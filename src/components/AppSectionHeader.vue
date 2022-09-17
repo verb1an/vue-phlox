@@ -43,5 +43,18 @@ export default {
             line-height: 1.5em;
         }
     }
+
+    &.tal {
+        .section__header {
+            text-align: left;
+            align-items: start;
+        }
+    }
+
+    &.min {
+        .section__header_title {
+            font-size: 35px;
+        }
+    }
 }
 </style>
