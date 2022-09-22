@@ -4,6 +4,7 @@
             <div class="section__content">
                 <section class="section filters">
                     <div class="content">
+                        <!-- ? Search block -->
                         <div class="content__row">
                             <form action="#">
                                 <app-input :type="'text'" :placeholder="'Search Here'">
@@ -20,9 +21,17 @@
                                     </template>
                                 </app-input>
                             </form>
-                        </div>
+                        </div> 
                         <div class="content__row">
                             <app-menu-catalog :title="'Product categories'" :menu="defMenu" />
+                        </div>
+                        <div class="content__row">
+                            <app-menu-catalog :title="'Choose price'">
+                                <template #content>
+                                    <!-- ! Need final -->
+                                    <!-- <app-input-range /> -->
+                                </template>
+                            </app-menu-catalog>
                         </div>
                     </div>
                 </section>
@@ -59,22 +68,32 @@ const meta = {
 
 const defMenu = [
     {
-        id: 1,
         title: "Earphones",
         path: "/shop/earphone/",
-        submenu: [
-            {
-                id: 11,
-                title: "TWS Earphones",
-                path: "/shop/earphone/tws-earphones/",
-            },
-        ],
     },
     {
-        id: 2,
-        title: "Earphone",
-        path: "/shop/earphone/",
-        submenu: [],
+        title: "Gadgets",
+        path: "/shop/gadgets/",
+    },
+    {
+        title: "Gaming",
+        path: "/shop/gaming/",
+    },
+    {
+        title: "Headphone",
+        path: "/shop/headphone/",
+    },
+    {
+        title: "Laptop",
+        path: "/shop/laptop/",
+    },
+    {
+        title: "Speaker",
+        path: "/shop/speaker/",
+    },
+    {
+        title: "Uncategorized",
+        path: "/shop/uncategorized/",
     },
 ];
 const catalog = [
@@ -165,15 +184,11 @@ const catalog = [
             margin-bottom: 30px;
 
             @media (max-width: 991px) {
-                flex: 0 0 33%;
-                margin-right: 20px;
+                flex: 0 0 100%;
             }
         }
 
         @media (max-width: 991px) {
-            display: flex;
-            align-items: start;
-            flex-wrap: wrap;
             max-width: 100%;
         }
     }

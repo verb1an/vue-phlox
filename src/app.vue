@@ -28,20 +28,31 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
-import { MakeChart } from '@/hooks/makeChart';
+import { ref } from "vue";
+import { useRouter } from 'vue-router';
+// import { onMounted } from "vue"; // <!-- ! Need final -->
+// import { MakeChart } from '@/hooks/makeChart'; // <!-- ! Need final -->
+
+const router = new useRouter();
 
 const showBtnToUp = ref(false);
-const showHelloPopap = ref(true);
+// const showHelloPopap = ref(true);  // <!-- ! Need final -->
 
 window.addEventListener("scroll", () => {
     window.pageYOffset > 700 ? (showBtnToUp.value = true) : (showBtnToUp.value = false);
 });
 
+router.beforeEach((to, from, next) => {
+    if(from.path !== to.path) {
+        window.scrollTo(0, 0);
+    }
+    next();
+})
+
 const toUpDocument = () => {
     window.scrollTo(0, 0);
 };
-
+ // <!-- ! Need final -->
 // onMounted(() => {
 //     const elements = [
 //         10, 20, 20

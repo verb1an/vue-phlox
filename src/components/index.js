@@ -5,8 +5,11 @@ import AppMenuCatalog from '@/components/AppMenuCatalog'
 
 import AppPopap from '@/components/AppPopap'
 
-import AppSectionHeader from '@/components/AppSectionHeader'
-import AppFSViewItem from '@/components/AppFSViewItem'
+// Sections
+
+import AppSectionHeader from '@/sections/_AppSectionHeader'
+import AppSectionFSItem from '@/sections/_AppSectionFSItem'
+import AppSectionBlog from '@/sections/_AppSectionBlog'
 
 import AppCatalogItem from '@/components/AppCatalogItem'
 import AppTopicalItem from '@/components/AppTopicalItem'
@@ -17,6 +20,7 @@ import AppLogo from '@/components/UI/AppLogo'
 import AppMenuLink from '@/components/UI/AppMenuLink'
 import AppBtn from '@/components/UI/AppBtn'
 import AppInput from '@/components/UI/AppInput'
+import AppInputRange from '@/components/UI/AppInputRange'
 import AppIcon from '@/components/UI/AppIcon'
 
 export default [
@@ -28,7 +32,8 @@ export default [
     AppPopap,
 
     AppSectionHeader,
-    AppFSViewItem,
+    AppSectionFSItem,
+    AppSectionBlog,
 
     AppCatalogItem,
     AppTopicalItem,
@@ -39,5 +44,6 @@ export default [
     AppMenuLink,
     AppBtn,
     AppInput,
+    AppInputRange,
     AppIcon
 ]

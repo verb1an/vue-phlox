@@ -67,7 +67,7 @@
             <section class="section sale-1" >
                 <div class="content">
                     <div class="content__row">
-                        <app-fs-viewitem class="fs-item fs-1" :style="'red'" :img="'assets/img/fsi-2.png'">
+                        <app-s-fsitem class="fs-item fs-1" :style="'red'" :img="'assets/img/fsi-2.png'">
                             <template #sale>20% OFF</template>
                             <template #bg-title>FINE SMILE</template>
                             <template #bg-date>15 Nov To 7 Dec</template>
@@ -83,7 +83,7 @@
                                     >Shop</app-btn
                                 >
                             </template>
-                        </app-fs-viewitem>
+                        </app-s-fsitem>
                     </div>
                 </div>
             </section>
@@ -91,7 +91,7 @@
             <section class="section catalog">
                 <app-section-header>
                     <template #title> Best Seller Products </template>
-                    <template #subtitle> speakerThere are many variations passages </template>
+                    <template #subtitle>Speaker there are many variations passages </template>
                 </app-section-header>
                 <div class="content">
                     <div class="content__row">
@@ -103,7 +103,7 @@
             <section class="section sale-2">
                 <div class="content">
                     <div class="content__row">
-                        <app-fs-viewitem class="fs-item fs-2" :style="'green'" :img="'assets/img/fsi-3.png'">
+                        <app-s-fsitem class="fs-item fs-2" :style="'green'" :img="'assets/img/fsi-3.png'">
                             <template #sale>20% OFF</template>
                             <template #bg-title>HAPPY<br />HOURSE</template>
                             <template #bg-date>15 Nov To 7 Dec</template>
@@ -119,7 +119,7 @@
                                     >Shop</app-btn
                                 >
                             </template>
-                        </app-fs-viewitem>
+                        </app-s-fsitem>
                     </div>
                 </div>
             </section>
@@ -129,11 +129,7 @@
                     <template #title>Recent News</template>
                     <template #subtitle>There are many variations passages</template>
                 </app-section-header>
-                <div class="content">
-                    <div class="content__row">
-                        <app-blog-item v-for="item in blogPosts" :key="item.id" :item="item"></app-blog-item>
-                    </div>
-                </div>
+                <app-s-blog :blogPosts="blogPosts" />
             </section>
         </div>
     </div>
@@ -541,17 +537,6 @@ onUpdated(() => {
 
         @media (max-width: 767px) {
             justify-content: center;
-        }
-    }
-}
-.section.blog__posts{
-    .content{
-        padding: 10px 0;
-        .content__row{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
         }
     }
 }

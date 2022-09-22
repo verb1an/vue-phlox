@@ -44,12 +44,11 @@ const returnValue = (event) => {
 
     .item__wrapper{
         background-image: vars.$gradient-gray-light-gray-273;
-        border-radius: 25px;
+        border-radius: 50px;
         display: flex;
         align-items: center;
         padding: 8px;
-        max-width: 600px;
-        width: 100%;
+        max-width: 100%;
     }
     
     .input__wrapper {

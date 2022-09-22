@@ -4,16 +4,14 @@
             <div @click="showHideMenu" class="menu__title">
                 <h3>{{ title }}</h3>
             </div>
-            <ul>
-                <!-- ! Need to final or rewrite something -->
-                <li><router-link :to="'/shop/earphones/'">Earphones</router-link></li>
-                <li><router-link :to="'/shop/gadgets/'">Gadgets</router-link></li>
-                <li><router-link :to="'/shop/gaming/'">Gaming</router-link></li>
-                <li><router-link :to="'/shop/headphone/'">Headphone</router-link></li>
-                <li><router-link :to="'/shop/laptop/'">Laptop</router-link></li>
-                <li><router-link :to="'/shop/speaker/'">Speaker</router-link></li>
-                <li><router-link :to="'/shop/uncategorized/'">Uncategorized</router-link></li>
+            <ul v-if="!$slots.content" class="_toggle_hidden">
+                <li v-for="item in menu" :key="item.path">
+                    <router-link :to="item.path">{{ item.title }}</router-link>
+                </li>
             </ul>
+            <div v-else class="content _toggle_hidden">
+                <slot name="content"></slot>
+            </div>
         </div>
     </nav>
 </template>
@@ -27,18 +25,26 @@ export default {
 <script setup>
 defineProps({
     title: String,
-    menu: {
-        type: Array,
-        required: true,
-    },
+    menu: Array,
 });
 
 const showHideMenu = (event) => {
-    const menu = event.target.closest(".app__menu_catalog");
-    const ul = menu.children[0].children[1]; // <!-- ? Ul el -->
-    menu.classList.toggle("show");
-    console.log(ul.children.length)
-    menu.classList.contains("show") ? (ul.style = `height: ${ul.children.length * 28.4}px`) : (ul.style = ""); // <!-- ? mt10 + h18.4 -->
+    const targetElement = event.target.closest(".component").children[0].children[1];
+    let showedTargetHeight = 0;
+    for (let i = 0; i < targetElement.children.length; i++) {
+        showedTargetHeight += targetElement.children[i].offsetHeight;
+
+        const margin = window.getComputedStyle(targetElement.children[i], null).margin;
+        if (!margin || margin == "0px") continue;
+        console.log(margin);
+        const allMargins = margin.replaceAll("px", "").split(" ");
+        showedTargetHeight += Number.parseInt(allMargins[0]) + Number.parseInt(allMargins[2]); // <!-- ? Top and bottom -->
+    }
+
+    targetElement.classList.toggle("_show");
+    targetElement.classList.contains("_show")
+        ? (targetElement.style = `height: ${showedTargetHeight+25}px`) // <!-- 50px for something wrong -->
+        : (targetElement.style = ""); // <!-- ? mt10 + h18.4 -->
 };
 </script>
 
@@ -58,17 +64,11 @@ const showHideMenu = (event) => {
                 font-size: 14px;
                 font-weight: 400;
                 transform: rotateZ(-90deg);
-                transition: all .4s ease-in-out;
+                transition: all 0.4s ease-in-out;
             }
         }
         ul {
             list-style: none;
-            padding: 0;
-            margin: 0;
-            height: 0;
-            opacity: 0;
-            overflow: hidden;
-            transition: all 0.4s ease-in-out;
             li {
                 margin-top: 10px;
                 padding: 0 40px;
@@ -86,16 +86,17 @@ const showHideMenu = (event) => {
                 }
             }
         }
-    }
 
-    &.show {
-        .menu__wrapper{
-            .menu__title {
-                &::after {
-                    transform: rotateZ(0);
-                }
-            }
-            ul {
+        ._toggle_hidden {
+            padding: 0;
+            margin: 0;
+            height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 0.4s ease-in-out;
+
+            &._show {
+                height: auto;
                 opacity: 1;
             }
         }

@@ -95,6 +95,8 @@ const showMenu = ref(false);
 const currentUrlPath = ref('/');
 
 const toggleMenu = (show = false) => {
+    if (deviceWidth.value > 746) return;
+    document.querySelector('html').classList.toggle('hidden');
     showMenu.value = show;
 };
 

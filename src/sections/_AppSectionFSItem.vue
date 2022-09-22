@@ -37,7 +37,7 @@
 
 <script>
 export default {
-    name: "app-fs-viewitem",
+    name: "app-s-fsitem",
 };
 </script>
 

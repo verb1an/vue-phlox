@@ -44,14 +44,14 @@ defineProps({
 
     &.btn-static {
         padding: 8px 15px;
-        border-radius: 24px;
+        border-radius: 80px;
         font-size: 15px;
     }
 
     &.btn-fill-circle {
         position: relative;
         padding: 12px 32px;
-        border-radius: 24px;
+        border-radius: 80px;
         transition: 0.36s ease-out;
         overflow: hidden;
         font-size: 15px;

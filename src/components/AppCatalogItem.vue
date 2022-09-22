@@ -82,6 +82,10 @@ defineProps({
                 font-weight: 500;
                 margin-bottom: 10px;
                 width: 100%;
+
+                @media (max-width: 767px) {
+                    font-size: 15px;
+                }
             }
 
             .item__header_prices {
@@ -106,6 +110,10 @@ defineProps({
                         border-radius: 2px;
                         background-color: vars.$color-app-text-04;
                     }
+
+                    @media (max-width: 767px) {
+                        font-size: 18px;
+                    }
                 }
 
                 .header__prices_current {
@@ -113,6 +121,10 @@ defineProps({
                     font-weight: 700;
                     padding: 10px 0;
                     color: vars.$color-g-text;
+
+                    @media (max-width: 767px) {
+                        font-size: 18px;
+                    }
                 }
             }
 
