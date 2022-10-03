@@ -1,60 +1,56 @@
 <template>
-    <div class="main">
-        <div class="container">
-            <div class="section__content">
-                <section class="section filters">
-                    <div class="content">
-                        <!-- ? Search block -->
-                        <div class="content__row">
-                            <form action="#">
-                                <app-input :type="'text'" :placeholder="'Search Here'">
-                                    <template #btn>
-                                        <app-btn
-                                            :type="'submit'"
-                                            :design="'fill-circle'"
-                                            :background="'primary'"
-                                            :color="'white'"
-                                            :style="'padding: 10px 12px;'"
-                                        >
-                                            <app-icon :icon="'i-search'" :style="'font-size: 14px;'" />
-                                        </app-btn>
-                                    </template>
-                                </app-input>
-                            </form>
-                        </div> 
-                        <div class="content__row">
-                            <app-menu-catalog :title="'Product categories'" :menu="defMenu" />
-                        </div>
-                        <div class="content__row">
-                            <app-menu-catalog :title="'Choose price'">
-                                <template #content>
-                                    <!-- ! Need final -->
-                                    <!-- <app-input-range /> -->
-                                </template>
-                            </app-menu-catalog>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="section catalog">
-                    <app-section-header class="tal min">
-                        <template #title>Shop</template>
-                        <template #subtitle>
-                            {{
-                                `Showing ${meta.limit * meta.page - meta.limit + 1}
-                                -${meta.limit * meta.page} 
-                                of ${meta.totalArt} results`
-                            }}</template
-                        >
-                    </app-section-header>
-                    <div class="content">
-                        <div class="content__row">
-                            <app-catalog-item v-for="item in catalog" :key="item.id" :item="item" />
-                        </div>
-                    </div>
-                </section>
+    <div class="section__content">
+        <section class="section filters">
+            <div class="content">
+                <!-- ? Search block -->
+                <div class="content__row">
+                    <form action="#">
+                        <app-ui-input :type="'text'" :placeholder="'Search Here'" class="_app__input_text">
+                            <template #btn>
+                                <app-ui-btn
+                                    :type="'submit'"
+                                    :design="'fill-circle'"
+                                    :background="'primary'"
+                                    :color="'white'"
+                                    :style="'padding: 10px 12px;'"
+                                >
+                                    <app-ui-icon :icon="'i-search'" :style="'font-size: 14px;'" />
+                                </app-ui-btn>
+                            </template>
+                        </app-ui-input>
+                    </form>
+                </div> 
+                <div class="content__row">
+                    <app-menu-catalog :title="'Product categories'" :menu="defMenu" />
+                </div>
+                <div class="content__row">
+                    <app-menu-catalog :title="'Choose price'">
+                        <template #content>
+                            <!-- ! Need final -->
+                            <!-- <app-ui-input-range /> -->
+                        </template>
+                    </app-menu-catalog>
+                </div>
             </div>
-        </div>
+        </section>
+
+        <section class="section catalog">
+            <app-section-header class="tal min">
+                <template #title>Shop</template>
+                <template #subtitle>
+                    {{
+                        `Showing ${meta.limit * meta.page - meta.limit + 1}
+                        -${meta.limit * meta.page} 
+                        of ${meta.totalArt} results`
+                    }}</template
+                >
+            </app-section-header>
+            <div class="content">
+                <div class="content__row">
+                    <app-catalog-item v-for="item in catalog" :key="item.id" :item="item" />
+                </div>
+            </div>
+        </section>
     </div>
 </template>
 

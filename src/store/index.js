@@ -1,7 +1,9 @@
 import { createStore } from 'vuex'
+import { appCart } from './AppCartModule'
 
 export default createStore({
   state: {
+    text: 42
   },
   getters: {
   },
@@ -10,5 +12,6 @@ export default createStore({
   actions: {
   },
   modules: {
+    appCart: appCart
   }
 })

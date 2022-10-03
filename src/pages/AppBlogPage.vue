@@ -1,9 +1,5 @@
 <template>
-    <div class="main">
-        <div class="container">
-            <app-s-blog :blogPosts="blogPosts" />
-        </div>
-    </div>
+    <app-s-blog :blogPosts="blogPosts" />
 </template>
 
 <script setup>

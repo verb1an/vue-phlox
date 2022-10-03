@@ -14,7 +14,7 @@
 
 <script>
 export default {
-    name: "app-input-range",
+    name: "app-ui-input-range",
 };
 </script>
 
@@ -30,8 +30,8 @@ defineProps({
     backColor: { String, default: "def" },
 });
 
-const movePoint = (evt) => {
-    console.log(evt.target);
+const movePoint = (event) => {
+    console.log(event.target);
 }
 </script>
 

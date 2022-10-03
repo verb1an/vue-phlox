@@ -1,12 +1,12 @@
 <template>
-    <div class="app__input ui__compontent">
-        <div class="item__wrapper">
+    <div class="app__input ui__component">
+        <label class="component__wrapper">
             <div class="input__wrapper">
-                <input 
-                    :type="type" 
-                    :modelValue="value"
+                <input
+                    :type="type"
+                    :value="modelValue"
                     :placeholder="placeholder"
-                    
+                    :style="style"
                     @input="returnValue"
                     @change="returnValue"
                 />
@@ -15,60 +15,83 @@
             <div v-if="$slots.btn" class="input__button">
                 <slot name="btn"></slot>
             </div>
-        </div>
+        </label>
     </div>
 </template>
 
 <script>
 export default {
-    name: "app-input",
+    name: "app-ui-input",
 };
 </script>
 
 <script setup>
-defineProps({
-    type: {type: String, default: "text"},
-    value: String,
-    placeholder: String
-})
+const props = defineProps({
+    type: { type: String, default: "text" },
+    modelValue: String,
+    placeholder: String,
+    style: String,
+});
 
-const emit = defineEmits(['input', 'sumbit']);
+const emit = defineEmits(["input", "sumbit"]);
+
 const returnValue = (event) => {
-    emit('update:modelValue', event.target.value);
-}
+    if (props.type == "tel") event.target.value = validateNumber(event.target.value);
+    emit("update:modelValue", event.target.value);
+};
+
+const validateNumber = (value) => {
+    if (value == "") return value;
+    return /^\d+$/.test(value) ? value : validateNumber(value.substring(0, value.length - 1));
+};
 </script>
 
 <style lang="scss" scoped>
-@use '@/assets/scss/vars';
-.app__input{
-
-    .item__wrapper{
+@use "@/assets/scss/vars";
+.app__input {
+    .component__wrapper {
         background-image: vars.$gradient-gray-light-gray-273;
-        border-radius: 50px;
         display: flex;
         align-items: center;
-        padding: 8px;
         max-width: 100%;
+        height: 100%;
     }
-    
+
     .input__wrapper {
-        height: 44px;
         width: 100%;
-        
+
         input {
             border: 0;
             outline: none;
             width: 100%;
             height: 100%;
             background-color: transparent;
-
             font-size: 16px;
-            padding: 0 20px;
         }
     }
 
-    .input__button{
+    .input__button {
         text-align: right;
+    }
+
+    &._app__input_bgc-none {
+        .component__wrapper {
+            background: transparent;
+        }
+    }
+
+    &._app__input_text {
+        .component__wrapper {
+            border-radius: 50px;
+            padding: 8px;
+        }
+        .input__wrapper {
+            height: 44px;
+
+            input {
+                padding: 0 20px;
+            }
+        }
     }
 }
 </style>

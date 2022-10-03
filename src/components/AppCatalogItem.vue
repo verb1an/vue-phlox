@@ -14,15 +14,19 @@
                     </router-link>
                 </div>
 
-                <div class="item__header_prices">
-                    <span v-if="item.sale > 0" class="header_prices_price header__prices_sale">{{
-                        item.price_original
-                    }}</span>
-                    <span class="header_prices_price header__prices_current">{{ item.price_current }}</span>
+                <div class="price">
+                    <span v-if="item.sale > 0" class="price__item price__sale">{{ item.price_original }}</span>
+                    <span class="price__item price__curr_price">{{ item.price_current }}</span>
                 </div>
-                <app-btn class="btn-catalog" :design="'static'" :background="'primary'" :color="'white'"
-                    >Add To Cart</app-btn
+                <app-ui-btn
+                    class="_btn-catalog"
+                    :design="'static'"
+                    :background="'primary'"
+                    :color="'white'"
+                    @click="addNewProductToCart(propd)"
                 >
+                Add To Cart
+                </app-ui-btn>
             </div>
 
             <span v-if="item.sale > 0" class="item__sale">{{ item.sale }}</span>
@@ -37,12 +41,29 @@ export default {
 </script>
 
 <script setup>
+import { useStore } from "vuex";
 defineProps({
     item: {
         type: Object,
         required: true,
     },
 });
+
+const propd = {
+    id: 3,
+    article: "ql4ieyn0",
+    name: "Beats",
+    img: "https://demo.phlox.pro/shop-digital/wp-content/uploads/sites/127/2019/09/Group-1272-935x701.jpg",
+    price_original: 499,
+    price_current: 499,
+    sale: 10,
+    quantity: 1,
+};
+
+const store = useStore();
+const addNewProductToCart = (product) => {
+    store.dispatch("appCart/ADD_NEW_PRODUCT", product);
+};
 </script>
 
 <style lang="scss" scoped>
@@ -88,9 +109,16 @@ defineProps({
                 }
             }
 
-            .item__header_prices {
+            .price {
                 transition: opacity 0.32s ease-in-out;
-                .header__prices_sale {
+
+                .price__item {
+                    &::before {
+                        content: "$";
+                    }
+                }
+
+                .price__sale {
                     position: relative;
                     font-size: 22px;
                     font-weight: 700;
@@ -116,7 +144,7 @@ defineProps({
                     }
                 }
 
-                .header__prices_current {
+                .price__curr_price {
                     font-size: 24px;
                     font-weight: 700;
                     padding: 10px 0;
@@ -128,18 +156,12 @@ defineProps({
                 }
             }
 
-            .btn-catalog {
+            ._btn-catalog {
                 position: absolute;
                 bottom: 0;
                 left: -100%;
                 transition: all 0.32s ease-in-out;
                 transform: scale(0.5);
-            }
-
-            .header_prices_price {
-                &::before {
-                    content: "$";
-                }
             }
         }
 
@@ -168,10 +190,10 @@ defineProps({
 
         &:hover {
             .item__header {
-                .item__header_prices {
+                .price {
                     opacity: 0;
                 }
-                .btn-catalog {
+                ._btn-catalog {
                     left: 0;
                     transform: scale(1);
                 }

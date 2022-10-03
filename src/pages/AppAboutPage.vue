@@ -1,43 +1,39 @@
 <template>
-    <div class="main">
-        <div class="container">
-            <div class="section__content">
-                <section class="section about">
-                    <div class="content">
-                        <div class="content__col left">
-                            <app-section-header class="tal _page-headers _max-content">
-                                <template #title>Welcome To Phlox</template>
-                                <template #subtitle>Who We Are ?</template>
-                                <template #content>
-                                    <p style="line-height: 1.5; max-width: 535px;">When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper surface of the impenetrable foliage of my trees, and but a few stray</p>
-                                    <p style="line-height: 1.5; max-width: 535px;">gleams steal into the inner sanctuary, I throw myself down among the tall grass by the trickling stream; and, as I lie close to the earth, a thousand unknown plants are noticed by me . when I hear the buzz of the little world among the stalks, and grow familiar with the countless indescribable forms of the insects and flies, then I feel the presence.</p>
-                                </template>
-                            </app-section-header>
-                            <!-- <div class="about__header">
-                                <h2 class="about__title">Who We Are ?</h2>
-                            </div>
-                            <div class="about__content">
-                                <p>When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper surface of the impenetrable foliage of my trees, and but a few stray</p>
-                                <p>gleams steal into the inner sanctuary, I throw myself down among the tall grass by the trickling stream; and, as I lie close to the earth, a thousand unknown plants are noticed by me . when I hear the buzz of the little world among the stalks, and grow familiar with the countless indescribable forms of the insects and flies, then I feel the presence.</p>
-                            </div> -->
-                            <app-btn
-                                :type="'button'"
-                                :design="'fill-circle'"
-                                :background="'primary'"
-                                :color="'white'"
-                                :style="'padding: 17px 60px;'"
-                                @click="$router.push('/contact-us/')"
-                            >Contact Us</app-btn>
-                        </div>
-                        <div class="content__col right">
-                            <div class="media__content">
-                                <img src="@/assets/img/about/main-about.jpg" alt="">
-                            </div>
-                        </div>
+    <div class="section__content">
+        <section class="section about">
+            <div class="content">
+                <div class="content__col left">
+                    <app-section-header class="tal _page-headers _max-content">
+                        <template #title>Welcome To Phlox</template>
+                        <template #subtitle>Who We Are ?</template>
+                        <template #content>
+                            <p style="line-height: 1.5; max-width: 535px;">When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper surface of the impenetrable foliage of my trees, and but a few stray</p>
+                            <p style="line-height: 1.5; max-width: 535px;">gleams steal into the inner sanctuary, I throw myself down among the tall grass by the trickling stream; and, as I lie close to the earth, a thousand unknown plants are noticed by me . when I hear the buzz of the little world among the stalks, and grow familiar with the countless indescribable forms of the insects and flies, then I feel the presence.</p>
+                        </template>
+                    </app-section-header>
+                    <!-- <div class="about__header">
+                        <h2 class="about__title">Who We Are ?</h2>
                     </div>
-                </section>
+                    <div class="about__content">
+                        <p>When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper surface of the impenetrable foliage of my trees, and but a few stray</p>
+                        <p>gleams steal into the inner sanctuary, I throw myself down among the tall grass by the trickling stream; and, as I lie close to the earth, a thousand unknown plants are noticed by me . when I hear the buzz of the little world among the stalks, and grow familiar with the countless indescribable forms of the insects and flies, then I feel the presence.</p>
+                    </div> -->
+                    <app-ui-btn
+                        :type="'button'"
+                        :design="'fill-circle'"
+                        :background="'primary'"
+                        :color="'white'"
+                        :style="'padding: 17px 60px;'"
+                        @click="$router.push('/contact-us/')"
+                    >Contact Us</app-ui-btn>
+                </div>
+                <div class="content__col right">
+                    <div class="media__content">
+                        <img src="@/assets/img/about/main-about.jpg" alt="">
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
     </div>
 </template>
 

@@ -1,138 +1,134 @@
 <template>
-    <div class="main">
-        <div class="container">
-            <section class="section intro">
-                <div class="content">
-                    <div class="intro__item">
-                        <div class="intro__item_header">
-                            <span class="item_header_pre_title">{{ introProduct.pre_title }}</span>
-                            <h2 class="item_header_title">{{ introProduct.title }}</h2>
-                            <h3 class="item_header_subtitle">{{ introProduct.subtitle }}</h3>
-                            <app-btn
-                                :design="'fill-circle'"
-                                :background="'primary'"
-                                :color="'white'"
-                                :style="'padding: 16px 32px;'"
-                                @click="$router.push(introProduct.link)"
-                            >
-                                Shop By Category
-                            </app-btn>
-                        </div>
-                        <div class="media__content">
-                            <img :src="introProduct.img" alt="" />
-                        </div>
-                        <div class="item__content">
-                            <h3 class="item__content_title">Description</h3>
-                            <div class="item__content_desc">
-                                <p>
-                                    There are many variations passages of Lorem Ipsum available, but the majority have
-                                    suffered alteration
-                                </p>
-                            </div>
-                        </div>
+    <section class="section intro">
+        <div class="content">
+            <div class="intro__item">
+                <div class="intro__item_header">
+                    <span class="item_header_pre_title">{{ introProduct.pre_title }}</span>
+                    <h2 class="item_header_title">{{ introProduct.title }}</h2>
+                    <h3 class="item_header_subtitle">{{ introProduct.subtitle }}</h3>
+                    <app-ui-btn
+                        :design="'fill-circle'"
+                        :background="'primary'"
+                        :color="'white'"
+                        :style="'padding: 16px 32px;'"
+                        @click="$router.push(introProduct.link)"
+                    >
+                        Shop By Category
+                    </app-ui-btn>
+                </div>
+                <div class="media__content">
+                    <img :src="introProduct.img" alt="" />
+                </div>
+                <div class="item__content">
+                    <h3 class="item__content_title">Description</h3>
+                    <div class="item__content_desc">
+                        <p>
+                            There are many variations passages of Lorem Ipsum available, but the majority have
+                            suffered alteration
+                        </p>
                     </div>
                 </div>
-            </section>
-
-            <section class="section topical__products">
-                <div class="content">
-                    <div class="content__row">
-                        <app-topical-item v-for="item in topical" :key="item.id" :img="item.img">
-                            <template #pre_title>{{ item.pre_title }}</template>
-                            <template #title>{{ item.title }}</template>
-                            <template #subtitle>{{ item.subtitle }}</template>
-                            <template #btn>
-                                <app-btn
-                                    :design="'fill-circle'"
-                                    :background="topicalButtons[item.id - 1].background"
-                                    :color="topicalButtons[item.id - 1].color"
-                                    @click="$router.push(item.link)"
-                                >
-                                    Browse
-                                </app-btn>
-                            </template>
-                        </app-topical-item>
-                    </div>
-                </div>
-            </section>
-
-            <section class="section advantages">
-                <div class="content">
-                    <div class="content__row">
-                        <app-advantages-item v-for="item in advantages" :key="item.id" :item="item" />
-                    </div>
-                </div>
-            </section>
-
-            <section class="section sale-1" >
-                <div class="content">
-                    <div class="content__row">
-                        <app-s-fsitem class="fs-item fs-1" :style="'red'" :img="'assets/img/fsi-2.png'">
-                            <template #sale>20% OFF</template>
-                            <template #bg-title>FINE SMILE</template>
-                            <template #bg-date>15 Nov To 7 Dec</template>
-                            <template #pre-title>Beats Solo Air</template>
-                            <template #title>Summer Sale</template>
-                            <template #desc>Company that's grown from 270 to 480 employees in the last 12 months.</template>
-                            <template #btn>
-                                <app-btn
-                                    @click="$router.push('/shop')"
-                                    :design="'fill-circle'"
-                                    :background="'white'"
-                                    :color="'primary'"
-                                    >Shop</app-btn
-                                >
-                            </template>
-                        </app-s-fsitem>
-                    </div>
-                </div>
-            </section>
-
-            <section class="section catalog">
-                <app-section-header>
-                    <template #title> Best Seller Products </template>
-                    <template #subtitle>Speaker there are many variations passages </template>
-                </app-section-header>
-                <div class="content">
-                    <div class="content__row">
-                        <app-catalog-item v-for="item in catalog" :key="item.id" :item="item" />
-                    </div>
-                </div>
-            </section>
-
-            <section class="section sale-2">
-                <div class="content">
-                    <div class="content__row">
-                        <app-s-fsitem class="fs-item fs-2" :style="'green'" :img="'assets/img/fsi-3.png'">
-                            <template #sale>20% OFF</template>
-                            <template #bg-title>HAPPY<br />HOURSE</template>
-                            <template #bg-date>15 Nov To 7 Dec</template>
-                            <template #pre-title>Beats Solo Air</template>
-                            <template #title>Summer Sale</template>
-                            <template #desc>Company that's grown from 270 to 480 employees in the last 12 months.</template>
-                            <template #btn>
-                                <app-btn
-                                    @click="$router.push('/shop')"
-                                    :design="'fill-circle'"
-                                    :background="'white'"
-                                    :color="'green'"
-                                    >Shop</app-btn
-                                >
-                            </template>
-                        </app-s-fsitem>
-                    </div>
-                </div>
-            </section>
-
-            <section class="section blog__posts">
-                <app-section-header>
-                    <template #title>Recent News</template>
-                    <template #subtitle>There are many variations passages</template>
-                </app-section-header>
-                <app-s-blog :blogPosts="blogPosts" />
-            </section>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <section class="section topical__products">
+        <div class="content">
+            <div class="content__row">
+                <app-topical-item v-for="item in topical" :key="item.id" :img="item.img">
+                    <template #pre_title>{{ item.pre_title }}</template>
+                    <template #title>{{ item.title }}</template>
+                    <template #subtitle>{{ item.subtitle }}</template>
+                    <template #btn>
+                        <app-ui-btn
+                            :design="'fill-circle'"
+                            :background="topicalButtons[item.id - 1].background"
+                            :color="topicalButtons[item.id - 1].color"
+                            @click="$router.push(item.link)"
+                        >
+                            Browse
+                        </app-ui-btn>
+                    </template>
+                </app-topical-item>
+            </div>
+        </div>
+    </section>
+
+    <section class="section advantages">
+        <div class="content">
+            <div class="content__row">
+                <app-advantages-item v-for="item in advantages" :key="item.id" :item="item" />
+            </div>
+        </div>
+    </section>
+
+    <section class="section sale-1" >
+        <div class="content">
+            <div class="content__row">
+                <app-s-fsitem class="fs-item fs-1" :style="'red'" :img="'assets/img/fsi-2.png'">
+                    <template #sale>20% OFF</template>
+                    <template #bg-title>FINE SMILE</template>
+                    <template #bg-date>15 Nov To 7 Dec</template>
+                    <template #pre-title>Beats Solo Air</template>
+                    <template #title>Summer Sale</template>
+                    <template #desc>Company that's grown from 270 to 480 employees in the last 12 months.</template>
+                    <template #btn>
+                        <app-ui-btn
+                            @click="$router.push('/shop')"
+                            :design="'fill-circle'"
+                            :background="'white'"
+                            :color="'primary'"
+                            >Shop</app-ui-btn
+                        >
+                    </template>
+                </app-s-fsitem>
+            </div>
+        </div>
+    </section>
+
+    <section class="section catalog">
+        <app-section-header>
+            <template #title> Best Seller Products </template>
+            <template #subtitle>Speaker there are many variations passages </template>
+        </app-section-header>
+        <div class="content">
+            <div class="content__row">
+                <app-catalog-item v-for="item in catalog" :key="item.id" :item="item" />
+            </div>
+        </div>
+    </section>
+
+    <section class="section sale-2">
+        <div class="content">
+            <div class="content__row">
+                <app-s-fsitem class="fs-item fs-2" :style="'green'" :img="'assets/img/fsi-3.png'">
+                    <template #sale>20% OFF</template>
+                    <template #bg-title>HAPPY<br />HOURSE</template>
+                    <template #bg-date>15 Nov To 7 Dec</template>
+                    <template #pre-title>Beats Solo Air</template>
+                    <template #title>Summer Sale</template>
+                    <template #desc>Company that's grown from 270 to 480 employees in the last 12 months.</template>
+                    <template #btn>
+                        <app-ui-btn
+                            @click="$router.push('/shop')"
+                            :design="'fill-circle'"
+                            :background="'white'"
+                            :color="'green'"
+                            >Shop</app-ui-btn
+                        >
+                    </template>
+                </app-s-fsitem>
+            </div>
+        </div>
+    </section>
+
+    <section class="section blog__posts">
+        <app-section-header>
+            <template #title>Recent News</template>
+            <template #subtitle>There are many variations passages</template>
+        </app-section-header>
+        <app-s-blog :blogPosts="blogPosts" />
+    </section>
 </template>
 
 <script>

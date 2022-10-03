@@ -8,7 +8,7 @@
 
 <script>
 export default {
-    name: "app-icon",
+    name: "app-ui-icon",
 };
 </script>
 

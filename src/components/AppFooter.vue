@@ -29,28 +29,28 @@
                             <div class="item">
                                 <div class="item__wrapper">
                                     <a href="https://vk.com/verb1an" target="_blank">
-                                        <app-icon :icon="'social-i-vk'" />
+                                        <app-ui-icon :icon="'social-i-vk'" />
                                     </a>
                                 </div>
                             </div>
                             <div class="item">
                                 <div class="item__wrapper">
                                     <a href="https://instagram.com/kineyprod" target="_blank">
-                                        <app-icon :icon="'social-i-instagram'" />
+                                        <app-ui-icon :icon="'social-i-instagram'" />
                                     </a>
                                 </div>
                             </div>
                             <div class="item">
                                 <div class="item__wrapper">
                                     <a href="https://t.me/verb1an" target="_blank">
-                                        <app-icon :icon="'social-i-telegram'" />
+                                        <app-ui-icon :icon="'social-i-telegram'" />
                                     </a>
                                 </div>
                             </div>
                             <div class="item">
                                 <div class="item__wrapper">
                                     <a href="https://github.com/verb1an" target="_blank">
-                                        <app-icon :icon="'social-i-github'" />
+                                        <app-ui-icon :icon="'social-i-github'" />
                                     </a>
                                 </div>
                             </div>
@@ -79,11 +79,11 @@
                                 <h3 class="form__pre_title">Subscribe To Our Email</h3>
                                 <h2 class="form__title">For Latest News & Updates</h2>
                             </div>
-                            <app-input v-model="label" :placeholder="'Enter your Email'">
+                            <app-ui-input v-model="label" :placeholder="'Enter your Email'" class="_app__input_text">
                                 <template #btn>
-                                    <app-btn :design="'fill-bgc'">Subscribe</app-btn>
+                                    <app-ui-btn :design="'fill-bgc'">Subscribe</app-ui-btn>
                                 </template>
-                            </app-input>
+                            </app-ui-input>
                         </form>
                     </div>
                 </div>

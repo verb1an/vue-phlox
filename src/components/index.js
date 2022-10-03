@@ -20,7 +20,9 @@ import AppLogo from '@/components/UI/AppLogo'
 import AppMenuLink from '@/components/UI/AppMenuLink'
 import AppBtn from '@/components/UI/AppBtn'
 import AppInput from '@/components/UI/AppInput'
+import AppTextarea from '@/components/UI/AppTextarea'
 import AppInputRange from '@/components/UI/AppInputRange'
+import AppInputNum from '@/components/UI/AppInputNum'
 import AppIcon from '@/components/UI/AppIcon'
 
 export default [
@@ -44,6 +46,8 @@ export default [
     AppMenuLink,
     AppBtn,
     AppInput,
+    AppTextarea,
     AppInputRange,
+    AppInputNum,
     AppIcon
 ]

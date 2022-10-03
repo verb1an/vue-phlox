@@ -10,9 +10,9 @@
                     <section v-show="deviceWidth > 746 || showMenu" class="header__menu_wrapper">
                         <nav class="header__menu">
                             <ul>
-                                <app-btn @click="toggleMenu(false)" class="menu__btn_close">
-                                    <app-icon :icon="'i-close'"></app-icon>
-                                </app-btn>
+                                <app-ui-btn @click="toggleMenu(false)" class="menu__btn_close">
+                                    <app-ui-icon :icon="'i-close'"></app-ui-icon>
+                                </app-ui-btn>
                                 <app-menu-link
                                     :class="currentUrlPath == '' ? 'current' : ''"
                                     :link="'/'"
@@ -49,29 +49,29 @@
                 </transition>
 
                 <div class="user__menu">
-                    <app-btn>Login</app-btn>
+                    <app-ui-btn>Login</app-ui-btn>
                 </div>
 
                 <div class="search__btn_side">
-                    <app-btn name="search">
-                        <app-icon :icon="'i-search'"></app-icon>
-                    </app-btn>
+                    <app-ui-btn name="search" @click="$emit('searchPopap:show')">
+                        <app-ui-icon :icon="'i-search'"></app-ui-icon>
+                    </app-ui-btn>
                 </div>
 
                 <div class="cart__btn_side">
-                    <app-btn name="cart">
-                        <app-icon :icon="'i-cart'"></app-icon>
-                    </app-btn>
+                    <app-ui-btn name="cart" @click="$router.push('/cart/')">
+                        <app-ui-icon :icon="'i-cart'"></app-ui-icon>
+                    </app-ui-btn>
                 </div>
 
                 <div class="menu__btn_mobile">
-                    <app-btn @click="toggleMenu(true)" name="mobile-menu">
+                    <app-ui-btn @click="toggleMenu(true)" name="mobile-menu">
                         <div class="btn__menu_wrapper">
                             <span class="line"></span>
                             <span class="line"></span>
                             <span class="line"></span>
                         </div>
-                    </app-btn>
+                    </app-ui-btn>
                 </div>
             </div>
         </div>
@@ -207,7 +207,8 @@ router.beforeEach((to, from, next) => {
     .search__btn_side,
     .cart__btn_side,
     .menu__btn_mobile {
-        width: 4%;
+        text-align: center;
+        width: 6%;
 
         /* media */
         @media (max-width: 746px) {

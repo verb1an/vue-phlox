@@ -5,7 +5,7 @@
                 :type="type"
                 :style="style"
                 class="btn"
-                :class="'btn-' + design + ' ' + 'bgc-' + background + ' ' + 'color-' + color"
+                :class="`btn-${design} bgc-${background} color-${color} hover-${hover}`"
             >
                 <span><slot></slot></span>
             </button>
@@ -15,7 +15,7 @@
 
 <script>
 export default {
-    name: "app-btn",
+    name: "app-ui-btn",
 };
 </script>
 
@@ -24,9 +24,10 @@ defineProps({
     type: { type: String, default: "button" },
     style: { type: String },
 
-    design: { type: String, defaul: "def" },
-    background: { type: String, defaul: "def" },
-    color: { type: String, defaul: "def" },
+    design: { type: String, default: "def" },
+    background: { type: String, default: "def" },
+    color: { type: String, default: "def" },
+    hover: { type: String, default: "none" }
 });
 </script>
 
@@ -95,6 +96,9 @@ defineProps({
         border-radius: 24px;
         transition: all 0.24s ease-in;
 
+        width: 100%;
+        height: 100%;
+
         &:hover {
             background-color: vars.$color-g-text;
         }
@@ -125,6 +129,17 @@ defineProps({
     }
     &.color-blue {
         color: #1a9dff;
+    }
+
+    &[class*="hover"],
+    &[class*=" hover"] {
+        transition: all .2s ease-in-out;
+    }
+
+    &.hover-primary {
+        &:hover {
+            color: vars.$color-g-primary;
+        }
     }
 }
 </style>

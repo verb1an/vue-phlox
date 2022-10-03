@@ -2,18 +2,21 @@
     <transition appear>
         <div class="app__popap component" v-if="show" :class="design" :style="style">
             <div class="popap__wrapper">
-                <div class="popap__header">
+                <div class="popap__close" @click="onBtnClose">
+                    <slot name="close"></slot>
+                </div>
+                <div v-if="$slots.title" class="popap__header">
                     <h3 class="popap__title"><slot name="title"></slot></h3>
                 </div>
-                <div class="popap__content">
+                <div v-if="$slots.text" class="popap__content">
                     <div class="popap__text">
                         <slot name="text"></slot>
                     </div>
-                    <app-btn :design="'fill-bgc'" :background="'primary'" :color="'white'" @click="close">
+                    <app-ui-btn :design="'fill-bgc'" :background="'primary'" :color="'white'" @click="close">
                         <slot name="btn"></slot>
-                    </app-btn>
+                    </app-ui-btn>
                 </div>
-                <div class="popap__media">
+                <div v-if="$slots.media" class="popap__media" @click="$emit('popap:open')">
                     <slot name="media"></slot>
                 </div>
             </div>
@@ -28,26 +31,26 @@ export default {
 </script>
 
 <script setup>
-import { onMounted } from 'vue';
-defineProps({
+import { watch } from "vue";
+const props = defineProps({
     show: {
         type: Boolean,
-        required: true
+        required: true,
     },
     style: String,
     design: String,
-   
 });
 const emit = defineEmits(["popap:close"]);
 
-const close = () => {
-    document.querySelector('html').style = 'overflow:auto;';
-    emit("popap:close");
-};
+watch(
+    () => props.show,
+    (value) => {
+        document.querySelector("html").style = `overflow: ${value ? "hidden" : "auto"};`;
+    }
+);
 
-onMounted(() => {
-    document.querySelector('html').style = 'overflow:hidden;';
-})
+const close = () => emit("popap:close");
+const onBtnClose = (event) => {if (event.target.closest(".btn__popap_close")) close()};
 </script>
 
 <style lang="scss" scoped>
@@ -87,11 +90,13 @@ onMounted(() => {
             line-height: 1.5;
             max-width: 80%;
             margin-bottom: 40px;
+        }
+    }
 
-            a {
-                color: vars.$color-g-text;
-                transition: all .2s ease;
-            }
+    &._full-screen {
+        .popap__wrapper {
+            width: 100%;
+            height: 100%;
         }
     }
 
@@ -108,6 +113,25 @@ onMounted(() => {
         .popap__wrapper {
             transform: translate(1000px, 150px) scale(0.3) skew(45deg);
             opacity: 0;
+        }
+    }
+}
+</style>
+
+<style lang="scss">
+@use "@/assets/scss/vars";
+.app__popap {
+    .popap__wrapper {
+        .popap__text {
+            a {
+                color: vars.$color-g-text;
+                transition: all 0.2s ease;
+                font-weight: 400;
+
+                &:hover {
+                    color: vars.$color-g-primary;
+                }
+            }
         }
     }
 }
