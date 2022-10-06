@@ -50,7 +50,7 @@ defineProps({
 });
 
 const propd = {
-    id: 3,
+    id: 4,
     article: "ql4ieyn0",
     name: "Beats",
     img: "https://demo.phlox.pro/shop-digital/wp-content/uploads/sites/127/2019/09/Group-1272-935x701.jpg",

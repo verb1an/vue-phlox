@@ -43,6 +43,7 @@ defineProps({
 
     color: vars.$color-app-text-08;
 
+    // <!-- * Buttons design -->
     &.btn-static {
         padding: 8px 15px;
         border-radius: 80px;
@@ -72,14 +73,13 @@ defineProps({
             border-radius: 50%;
 
             width: 0;
-            height: 0;
+            aspect-ratio: 1 / 1;
         }
 
         &:hover {
             color: vars.$color-g-white;
             &::before {
-                width: 200px;
-                height: 200px;
+                width: 105%;
             }
         }
 
@@ -108,13 +108,50 @@ defineProps({
         }
     }
 
+    &.btn-square-stroke {
+        width: 100%;
+        padding: 20px;
+        position: relative;
+        border: 1px solid vars.$color-app-bg-gray;
+        border-radius: 4px;
+        overflow: hidden;
+        isolation: isolate;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.24s ease-in;
+            background-color: vars.$color-g-text;
+            border-radius: 50%;
+            z-index: -1;
+            
+            width: 0;
+            aspect-ratio: auto 1 / 1;
+        }
+
+        &:hover {
+            color: vars.$color-g-white;
+            &::before {
+                width: 105%;
+            }
+        }
+    }
+
+    // <!-- * Buttons backgrounds -->
     &.bgc-primary {
         background-color: vars.$color-g-primary;
     }
     &.bgc-white {
         background-color: vars.$color-g-white;
     }
+    &.bgc-gray {
+        background-color: vars.$color-app-bg-gray;
+    }
 
+    // <!-- * Buttons text colors -->
     &.color-primary {
         color: vars.$color-g-primary;
     }

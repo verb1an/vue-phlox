@@ -14,7 +14,7 @@
             </app-ui-btn>
         </transition>
 
-        <app-popap :show="showHelloPopap" @popap:close="closehelloPopap">
+        <app-popap :show="showHelloPopap" @popap:close="closehelloPopap" class="_full _fade-left-skew">
             <template #title>
                 <span>Hi, everyone!</span>
             </template>
@@ -37,7 +37,7 @@
             :show="showSearchPopap"
             @popap:close="showSearchPopap = false"
             @popap:open="showSearchPopap = true"
-            class="_full-screen"
+            class="_full _full-screen _fade-left-skew"
         >
             <template #close>
                 <app-ui-btn style="float: right" class="btn__popap_close">

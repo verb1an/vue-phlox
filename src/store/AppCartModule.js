@@ -53,6 +53,15 @@ export const appCart = {
     },
     actions: {
         ADD_NEW_PRODUCT({state}, product) {
+            const index = state.cart.findIndex(( el, index ) => {
+                if (el.id == product.id) {
+                    return String(index);
+                }
+            })
+            if(index != -1) {
+                state.cart[Number(index)].quantity += 1;
+                return;
+            }
             state.cart.push(product)
         },
         REMOVE_ITEM({state}, productID) {

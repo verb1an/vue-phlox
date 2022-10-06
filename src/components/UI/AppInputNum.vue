@@ -50,6 +50,10 @@ const returnValue = (value) => {
     emit("update:modelValue", Number(value));
 };
 
+/* 
+    <!-- ? Important ! -->
+    <!-- ? Use 2 input on 1 page and work reactive values - max, min should be the same for both -->
+*/ 
 watch(() => props.modelValue, () => {
     if(isNaN(props.modelValue)) returnValue(props.min ?? 0);
     if(props.max && props.modelValue > props.max) returnValue(props.max)

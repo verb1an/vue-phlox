@@ -47,9 +47,20 @@
                         </div>
                     </div>
                 </div>
+                <div class="content__row">
+                    <div class="cart__empty">
+                        <div class="title">
+                            <app-ui-icon :icon="'i-cart'" :style="'font-size: 32px; opacity: 0.7;'" />
+                            <h2>Your cart is currently empty.</h2>
+                        </div>
+                        <app-ui-btn :design="'fill-bgc'" :background="'primary'" :color="'white'" @click="$router.push('/shop/')">
+                            Return to shop
+                        </app-ui-btn>
+                    </div>
+                </div>
             </div>
         </section>
-        <section class="section total__amount">
+        <section v-if="cartItems.length" class="section total__amount">
             <div class="content">
                 <div class="content__row">
                     <h2 class="title">Cart totals</h2>
@@ -223,6 +234,27 @@ const removeItem = (event) => {
 
                 &:hover {
                     background-color: rgba(0, 0, 0, .05);
+                }
+            }
+
+            .cart__empty {
+                display: flex;
+                flex-direction: column;
+                align-items: start;
+                padding: 50px 0;
+
+                .title {
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 40px;
+
+                    h2 {
+                        font-size: 20px;
+                        color: vars.$color-app-bg-gray;
+                        font-weight: 600;
+                        margin-left: 20px;
+                    }
+                    
                 }
             }
         }

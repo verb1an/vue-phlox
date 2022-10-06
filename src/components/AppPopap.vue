@@ -2,7 +2,7 @@
     <transition appear>
         <div class="app__popap component" v-if="show" :class="design" :style="style">
             <div class="popap__wrapper">
-                <div class="popap__close" @click="onBtnClose">
+                <div v-if="$slots.close" class="popap__close" @click="onBtnClose">
                     <slot name="close"></slot>
                 </div>
                 <div v-if="$slots.title" class="popap__header">
@@ -39,24 +39,28 @@ const props = defineProps({
     },
     style: String,
     design: String,
+    stopScroll: { type: Boolean, default: true },
 });
 const emit = defineEmits(["popap:close"]);
 
-watch(
-    () => props.show,
-    (value) => {
-        document.querySelector("html").style = `overflow: ${value ? "hidden" : "auto"};`;
-    }
-);
+if (props.stopScroll)
+    watch(
+        () => props.show,
+        (value) => {
+            document.querySelector("html").style = `overflow: ${value ? "hidden" : "auto"};`;
+        }
+    );
 
 const close = () => emit("popap:close");
-const onBtnClose = (event) => {if (event.target.closest(".btn__popap_close")) close()};
+const onBtnClose = (event) => {
+    if (event.target.closest(".btn__popap_close")) close();
+};
 </script>
 
 <style lang="scss" scoped>
 @use "@/assets/scss/vars";
 .app__popap {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -66,11 +70,10 @@ const onBtnClose = (event) => {if (event.target.closest(".btn__popap_close")) cl
     justify-content: center;
     z-index: 100;
     transition: all 0.5s ease-in-out;
-    background-color: rgba(0, 0, 0, 0.5);
 
     .popap__wrapper {
         background-color: vars.$color-g-white;
-        padding: 20px;
+        padding: 0;
         box-shadow: 0 0 14px rgba(0, 0, 0, 0.3);
         max-width: 100%;
         width: 600px;
@@ -93,6 +96,15 @@ const onBtnClose = (event) => {if (event.target.closest(".btn__popap_close")) cl
         }
     }
 
+    &._full {
+        position: fixed;
+        background-color: rgba(0, 0, 0, 0.5);
+
+        .popap__wrapper {
+            padding: 20px;
+        }
+    }
+
     &._full-screen {
         .popap__wrapper {
             width: 100%;
@@ -100,18 +112,33 @@ const onBtnClose = (event) => {if (event.target.closest(".btn__popap_close")) cl
         }
     }
 
-    &.v-enter-active,
-    &.v-leave-active {
+    &._fade-left-skew.v-enter-active,
+    &._fade-left-skew.v-leave-active {
         .popap__wrapper {
             transition: all 0.5s ease-in-out;
         }
     }
 
-    &.v-enter-from,
-    &.v-leave-to {
+    &._fade-left-skew.v-enter-from,
+    &._fade-left-skew.v-leave-to {
         background-color: rgba(0, 0, 0, 0.5);
         .popap__wrapper {
             transform: translate(1000px, 150px) scale(0.3) skew(45deg);
+            opacity: 0;
+        }
+    }
+
+    &._fade-down.v-enter-active,
+    &._fade-down.v-leave-active {
+        .popap__wrapper {
+            transition: all 0.3s ease-in-out;
+        }
+    }
+
+    &._fade-down.v-enter-from,
+    &._fade-down.v-leave-to {
+        .popap__wrapper {
+            transform: translate(0, 150px);
             opacity: 0;
         }
     }
