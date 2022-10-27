@@ -14,54 +14,57 @@
             </app-ui-btn>
         </transition>
 
-        <app-popap :show="showHelloPopap" @popap:close="closehelloPopap" class="_full _fade-left-skew">
-            <template #title>
-                <span>Hi, everyone!</span>
-            </template>
-            <template #text>
-                <p>
-                    This project is only a free interpretaion of the <a href="" target="_blank">demo.phlox</a> website
-                    and is not intended for commercial use
-                </p>
-                <p>Created by <a href="https://github.com/verb1an" target="_blank">verb1an</a></p>
-            </template>
-            <template #btn>
-                <span>Ok</span>
-            </template>
-            <template #media>
-                <div class="media__wrapper" id="helloPopapChart"></div>
-            </template>
-        </app-popap>
-
-        <app-popap
-            :show="showSearchPopap"
-            @popap:close="showSearchPopap = false"
-            @popap:open="showSearchPopap = true"
-            class="_full _full-screen _fade-left-skew"
-        >
-            <template #close>
-                <app-ui-btn style="float: right" class="btn__popap_close">
-                    <app-ui-icon :icon="'i-close'" />
-                </app-ui-btn>
-            </template>
-            <template #media>
-                <form class="search__block">
-                    <app-ui-input :type="'text'" :placeholder="'Search Here'" class="_app__input_text">
-                        <template #btn>
-                            <app-ui-btn
-                                :type="'submit'"
-                                :design="'fill-circle'"
-                                :background="'primary'"
-                                :color="'white'"
-                                :style="'padding: 15px;'"
-                            >
-                                <app-ui-icon :icon="'i-search'" :style="'display:block;height: 20px; width: 20px;'" />
-                            </app-ui-btn>
-                        </template>
-                    </app-ui-input>
-                </form>
-            </template>
-        </app-popap>
+        <Suspense>
+            <app-popap :show="showHelloPopap" @popap:close="closehelloPopap" class="_full _fade-left-skew">
+                <template #title>
+                    <span>Hi, everyone!</span>
+                </template>
+                <template #text>
+                    <p>
+                        This project is only a free interpretaion of the <a href="" target="_blank">demo.phlox</a> website
+                        and is not intended for commercial use
+                    </p>
+                    <p>Created by <a href="https://github.com/verb1an" target="_blank">verb1an</a></p>
+                </template>
+                <template #btn>
+                    <span>Ok</span>
+                </template>
+                <template #media>
+                    <div class="media__wrapper" id="helloPopapChart"></div>
+                </template>
+            </app-popap>
+        </Suspense>
+        <Suspense>
+            <app-popap
+                :show="showSearchPopap"
+                @popap:close="showSearchPopap = false"
+                @popap:open="showSearchPopap = true"
+                class="_full _full-screen _fade-left-skew"
+            >
+                <template #close>
+                    <app-ui-btn style="float: right" class="btn__popap_close">
+                        <app-ui-icon :icon="'i-close'" />
+                    </app-ui-btn>
+                </template>
+                <template #media>
+                    <form class="search__block">
+                        <app-ui-input :type="'text'" :placeholder="'Search Here'" class="_app__input_text">
+                            <template #btn>
+                                <app-ui-btn
+                                    :type="'submit'"
+                                    :design="'fill-circle'"
+                                    :background="'primary'"
+                                    :color="'white'"
+                                    :style="'padding: 15px;'"
+                                >
+                                    <app-ui-icon :icon="'i-search'" :style="'display:block;height: 20px; width: 20px;'" />
+                                </app-ui-btn>
+                            </template>
+                        </app-ui-input>
+                    </form>
+                </template>
+            </app-popap>
+        </Suspense>
     </div>
 </template>
 

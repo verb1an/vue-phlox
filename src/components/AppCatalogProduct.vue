@@ -1,23 +1,25 @@
 <template>
-    <article class="app_product_item component" :data-item="item.id">
+    <article class="app_product_item component" :data-item="product.id">
         <div class="item__wrapper">
             <div class="item__media">
-                <router-link :to="'/shop/' + item.id + '-' + item.name">
-                    <img :src="item.img" alt="" />
+                <router-link :to="'/shop/product/' + product.article">
+                    <img :src="product.img[0]" alt="product img" />
                 </router-link>
             </div>
 
             <div class="item__header">
                 <div class="item__header_title">
-                    <router-link :to="'/shop/' + item.id + '-' + item.name">
-                        <h3>{{ item.name }}</h3>
+                    <router-link :to="'/shop/' + product.id + '-' + product.name">
+                        <h3>{{ product.name }}</h3>
                     </router-link>
                 </div>
 
-                <div class="price">
-                    <span v-if="item.sale > 0" class="price__item price__sale">{{ item.price_original }}</span>
-                    <span class="price__item price__curr_price">{{ item.price_current }}</span>
-                </div>
+                <app-section-price 
+                    :priceOriginal="product.price_original"
+                    :priceCurrent="product.price_current"
+                    :sale="product.sale"
+                />
+
                 <app-ui-btn
                     class="_btn-catalog"
                     :design="'static'"
@@ -29,25 +31,26 @@
                 </app-ui-btn>
             </div>
 
-            <span v-if="item.sale > 0" class="item__sale">{{ item.sale }}</span>
+            <span v-if="product.sale > 0" class="item__sale">{{ product.sale }}</span>
         </div>
     </article>
 </template>
 
 <script>
 export default {
-    name: "app-catalog-item",
+    name: "app-catalog-product",
 };
 </script>
 
 <script setup>
 import { useStore } from "vuex";
 defineProps({
-    item: {
+    product: {
         type: Object,
         required: true,
     },
 });
+const store = useStore();
 
 const propd = {
     id: 4,
@@ -60,9 +63,8 @@ const propd = {
     quantity: 1,
 };
 
-const store = useStore();
-const addNewProductToCart = (product) => {
-    store.dispatch("appCart/ADD_NEW_PRODUCT", product);
+const addNewProductToCart = (newProduct) => {
+    store.dispatch("appCart/ADD_NEW_PRODUCT", newProduct);
 };
 </script>
 
@@ -99,60 +101,14 @@ const addNewProductToCart = (product) => {
             position: relative;
             overflow: hidden;
             .item__header_title {
-                font-size: 18px;
+                font-size: 14px;
                 font-weight: 500;
                 margin-bottom: 10px;
                 width: 100%;
+                h3 {color: vars.$color-app-text-08;}
 
                 @media (max-width: 767px) {
-                    font-size: 15px;
-                }
-            }
-
-            .price {
-                transition: opacity 0.32s ease-in-out;
-
-                .price__item {
-                    &::before {
-                        content: "$";
-                    }
-                }
-
-                .price__sale {
-                    position: relative;
-                    font-size: 22px;
-                    font-weight: 700;
-                    color: vars.$color-app-text-04;
-                    padding: 0 5px;
-                    margin-right: 15px;
-                    line-height: 40px;
-
-                    &::after {
-                        content: "";
-                        position: absolute;
-                        display: block;
-                        top: 50%;
-                        left: 0;
-                        width: 100%;
-                        height: 3px;
-                        border-radius: 2px;
-                        background-color: vars.$color-app-text-04;
-                    }
-
-                    @media (max-width: 767px) {
-                        font-size: 18px;
-                    }
-                }
-
-                .price__curr_price {
-                    font-size: 24px;
-                    font-weight: 700;
-                    padding: 10px 0;
-                    color: vars.$color-g-text;
-
-                    @media (max-width: 767px) {
-                        font-size: 18px;
-                    }
+                    font-size: 12px;
                 }
             }
 

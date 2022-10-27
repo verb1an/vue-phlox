@@ -10,8 +10,10 @@ import AppPopap from '@/components/AppPopap'
 import AppSectionHeader from '@/sections/_AppSectionHeader'
 import AppSectionFSItem from '@/sections/_AppSectionFSItem'
 import AppSectionBlog from '@/sections/_AppSectionBlog'
+import AppSectionPrice from '@/sections/_AppSectionPrice'
+import AppSectionSlider from '@/sections/_AppSectionSlider'
 
-import AppCatalogItem from '@/components/AppCatalogItem'
+import AppCatalogProduct from '@/components/AppCatalogProduct'
 import AppTopicalItem from '@/components/AppTopicalItem'
 import AppBlogItem from '@/components/AppBlogItem'
 import AppAdvantagesItem from '@/components/AppAdvantagesItem'
@@ -23,6 +25,7 @@ import AppInput from '@/components/UI/AppInput'
 import AppTextarea from '@/components/UI/AppTextarea'
 import AppInputRange from '@/components/UI/AppInputRange'
 import AppInputNum from '@/components/UI/AppInputNum'
+import AppInputRating from '@/components/UI/AppInputRating'
 import AppIcon from '@/components/UI/AppIcon'
 
 export default [
@@ -36,8 +39,10 @@ export default [
     AppSectionHeader,
     AppSectionFSItem,
     AppSectionBlog,
+    AppSectionPrice,
+    AppSectionSlider,
 
-    AppCatalogItem,
+    AppCatalogProduct,
     AppTopicalItem,
     AppBlogItem,
     AppAdvantagesItem,
@@ -49,5 +54,6 @@ export default [
     AppTextarea,
     AppInputRange,
     AppInputNum,
+    AppInputRating,
     AppIcon
 ]

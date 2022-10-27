@@ -1,10 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '@/pages/AppHomePage'
 import CatalogPage from '@/pages/AppCatalogPage'
+import ProductPage from '@/pages/AppProductPage'
 import AboutPage from '@/pages/AppAboutPage'
 import BlogPage from '@/pages/AppBlogPage'
 import ContactPage from '@/pages/AppContactPage'
 import CartPage from '@/pages/AppCartPage'
+
+// import AppErrorPage from '@/pages/AppErrorPage'
 
 const routes = [
     {
@@ -28,28 +31,11 @@ const routes = [
         }
     },
     {
-        path: '/shop/:category',
-        component: CatalogPage,
-        name: 'Category',
+        path: '/shop/product/:article',
+        component: ProductPage,
+        name: 'Product',
         meta: {
-            title: "Category",
-            breadcrumb: [
-                {name: "Home", path: "Home"},
-                {name: "Product", path: "Shop"}
-            ]
-        }
-    },
-    {
-        path: '/shop/:category/:subcategory',
-        component: CatalogPage,
-        name: 'Subcategory',
-        meta: {
-            title: "Category",
-            breadcrumb: [
-                {name: "Home", path: "Home"},
-                {name: "Product", path: "Shop"},
-                {name: "Category", path: "Category"}
-            ]
+            title: "Product"
         }
     },
     {
@@ -83,7 +69,15 @@ const routes = [
         meta: {
             title: "Cart"
         }
-    }
+    },
+    // {
+    //     path: '*',
+    //     component: AppErrorPage,
+    //     name: '404 page',
+    //     meta: {
+    //         title: "404"
+    //     }
+    // }
 ]
 
 const router = createRouter({

@@ -61,54 +61,64 @@
                 <div class="cart__btn_side" @mouseenter="showCartPopap = true" @mouseleave="showCartPopap = false">
                     <app-ui-btn name="cart" @click="$router.push('/cart/')">
                         <app-ui-icon :icon="'i-cart'"></app-ui-icon>
+                        <transition>
+                            <div v-if="cartItems.length" class="cart__quantity">
+                                {{ itemsQuantity }}
+                            </div>
+                        </transition>
                     </app-ui-btn>
 
-                    <app-popap :show="showCartPopap" class="cart__popap _fade-down" :stopScroll="false">
-                        <template #media>
-                            <div class="items__wrapper" v-if="cartItems.length">
-                                <transition-group>
-                                    <div
-                                        v-for="item in cartItems"
-                                        :key="item.id"
-                                        class="item product"
-                                        :data-product="item.id"
-                                    >
-                                        <div class="item__wrapper">
-                                            <div class="item__media"><img :src="item.img" alt="product" /></div>
-                                            <div class="item__header">
-                                                <h3 class="item__header_name">{{ item.name }}</h3>
-                                                <div class="quantity__price">
-                                                    <app-ui-input-num v-model="item.quantity" :max="15" :min="1" />
-                                                    <div class="price">
-                                                        <span class="price__item price__curr_price"
-                                                            >{{ item.price_current * item.quantity }}$</span
-                                                        >
+                    <Suspense v-if="deviceWidth > 746">
+                        <app-popap :show="showCartPopap" class="cart__popap _fade-down" :stopScroll="false">
+                            <template #media>
+                                <div class="cart" v-if="cartItems.length">
+                                    <div class="items__wrapper">
+                                        <transition-group>
+                                            <div
+                                                v-for="item in cartItems"
+                                                :key="item.id"
+                                                class="item product"
+                                                :data-product="item.id"
+                                            >
+                                                <div class="item__wrapper">
+                                                    <div class="item__media"><img :src="item.img[0]" alt="product" /></div>
+                                                    <div class="item__header">
+                                                        <h3 class="item__header_name">{{ item.name }}</h3>
+                                                        <div class="quantity__price">
+                                                            <app-ui-input-num v-model="item.quantity" :max="15" :min="1" />
+                                                            <div class="price">
+                                                                <span class="price__item price__curr_price"
+                                                                    >{{ item.price_current * item.quantity }}$</span
+                                                                >
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item__buttons">
+                                                        <app-ui-btn :type="'button'" @click="removeItem">
+                                                            <app-ui-icon :icon="'i-close'" :style="'font-size: 14px;'" />
+                                                        </app-ui-btn>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="item__buttons">
-                                                <app-ui-btn :type="'button'" @click="removeItem">
-                                                    <app-ui-icon :icon="'i-close'" :style="'font-size: 14px;'" />
-                                                </app-ui-btn>
-                                            </div>
-                                        </div>
+                                        </transition-group>
                                     </div>
-                                </transition-group>
-                            </div>
-                            <div class="buttons" v-if="cartItems.length">
-                                <app-ui-btn :design="'square-stroke'" @click="$router.push('/cart/')"> View Cart </app-ui-btn>
-                                <app-ui-btn :design="'square-stroke'" :background="'gray'" :color="'white'">
-                                    Proceed To Checkout
-                                </app-ui-btn>
-                            </div>
-                            <div class="cart__empty" v-else>
-                                <app-ui-icon :icon="'i-cart'" :style="'font-size: 32px; opacity: 0.7;'" />
-                                <h3 class="title">
-                                    Cart is empty
-                                </h3>
-                            </div>
-                        </template>
-                    </app-popap>
+                                    <h3 class="subtotal" >Sub total: {{ totalPrice }}$</h3>
+                                    <div class="buttons">
+                                        <app-ui-btn :design="'square-stroke'" @click="$router.push('/cart/')"> View Cart </app-ui-btn>
+                                        <app-ui-btn :design="'square-stroke'" :background="'gray'" :color="'white'">
+                                            Proceed To Checkout
+                                        </app-ui-btn>
+                                    </div>
+                                </div>
+                                <div class="cart__empty" v-else>
+                                    <app-ui-icon :icon="'i-cart'" :style="'font-size: 32px; opacity: 0.7;'" />
+                                    <h3 class="title">
+                                        Cart is empty
+                                    </h3>
+                                </div>
+                            </template>
+                        </app-popap>
+                    </Suspense>
                 </div>
 
                 <div class="menu__btn_mobile">
@@ -145,6 +155,8 @@ const currentUrlPath = ref("/");
 const showCartPopap = ref(false);
 
 const cartItems = computed(() => store.getters["appCart/GET_CART"]);
+const totalPrice = computed(() => store.getters['appCart/GET_TOTAL_PRICE']);
+const itemsQuantity = computed(() => store.getters['appCart/GET_ITEMS_QUANTITY']);
 const removeItem = (event) => {
     const productId = event.target.closest(".product").getAttribute("data-product");
     store.dispatch("appCart/REMOVE_ITEM", productId);
@@ -321,8 +333,8 @@ router.beforeEach((to, from, next) => {
                         padding: 5px 0;
                         text-align: left;
                         .item__header_name {
-                            font-size: 500px;
-                            font-size: 16px;
+                            font-size: 13px;
+                            font-weight: 400;
                             margin-bottom: 5px;
                         }
 
@@ -363,6 +375,13 @@ router.beforeEach((to, from, next) => {
                 }
             }
 
+            .subtotal {
+                text-align: left;
+                font-size: 15px;
+                font-weight: 500;
+                margin: 5px 20px;
+            }
+
             .buttons {
                 padding: 20px;
 
@@ -376,6 +395,33 @@ router.beforeEach((to, from, next) => {
                 .title {
                     color: vars.$color-app-bg-gray;
                 }
+            }
+        }
+
+        .cart__quantity {
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            background: vars.$color-g-primary;
+            color: vars.$color-g-white;
+            font-size: 15px;
+            z-index: 10;
+
+            &.v-enter-active,
+            &.v-leave-active {
+                transition: all 0.2s ease-in-out;
+            }
+
+            &.v-enter-from,
+            &.v-leave-to {
+                opacity: 0;
+                transform: translate(-50%, 50%) scale(0.1);
             }
         }
     }

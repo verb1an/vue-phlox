@@ -2,52 +2,53 @@
     <div class="section__content">
         <section class="section cart">
             <div class="content">
-                <div class="content__row">
-                    <div class="item product" v-for="item in cartItems" :key="item.id" :data-product="item.id">
-                        <div class="item__media">
-                            <router-link :to="`/shop/${item.id}-${item.name}/`">
-                                <img :src="item.img" alt="product image" />
-                            </router-link>
-                        </div>
-                        <div class="item__content">
-                            <div class="item__header">
-                                <h2 class="item__header_name">
-                                    <router-link :to="`/shop/${item.id}-${item.name}/`">{{ item.name }}</router-link>
-                                </h2>
-                                <span class="item__header_artcile"></span>
-                                <div class="price">
-                                    <span v-if="item.sale > 0" class="price__item price__sale">{{
-                                        item.price_original
-                                    }}</span>
-                                    <span class="price__item price__curr_price">{{ item.price_current }}</span>
-                                </div>
+                <div v-if="cartProducts.length" class="content__row" >
+                    <div class="item product" v-for="product in cartProducts" :key="product.id" :data-product="product.id">
+                        <div class="item__wrapper">
+                            <div class="item__media">
+                                <router-link :to="`/shop/product/${product.id}-${product.name}/`">
+                                    <img :src="product.img[0]" alt="product image" />
+                                </router-link>
                             </div>
-                            <div class="item__buttons">
-                                <app-ui-btn
-                                    :type="'button'"
-                                    :design="'static'"
-                                    :hover="'primary'"
-                                    :style="'font-weight: 400;'"
+                            <div class="item__content">
+                                <div class="item__header">
+                                    <h2 class="item__header_name">
+                                        <router-link :to="`/shop/${product.id}-${product.name}/`">{{ product.name }}</router-link>
+                                    </h2>
+                                    <span class="item__header_article">{{ product.article }}</span>
+                                    <app-section-price 
+                                        :priceOriginal="product.price_original"
+                                        :priceCurrent="product.price_current"
+                                        :sale="product.sale"
+                                    />
+                                </div>
+                                <div class="item__buttons">
+                                    <app-ui-btn
+                                        :type="'button'"
+                                        :design="'static'"
+                                        :hover="'primary'"
+                                        :style="'font-weight: 400;'"
+                                        >
+                                        В избранное
+                                    </app-ui-btn >
+                                    <app-ui-btn
+                                        :type="'button'"
+                                        :design="'static'"
+                                        :hover="'primary'"
+                                        :style="'font-weight: 400;'"
+                                        @click="removeItem"
                                     >
-                                    В избранное
-                                </app-ui-btn >
-                                <app-ui-btn
-                                    :type="'button'"
-                                    :design="'static'"
-                                    :hover="'primary'"
-                                    :style="'font-weight: 400;'"
-                                    @click="removeItem"
-                                >
-                                    Удалить
-                                </app-ui-btn>
+                                        Удалить
+                                    </app-ui-btn>
+                                </div>
                             </div>
                         </div>
                         <div class="item__quan">
-                            <app-ui-input-num v-model="item.quantity" :max="9" :min="0" class="_app__input_text" />
+                            <app-ui-input-num v-model="product.quantity" :max="9" :min="1" class="_app__input_text" />
                         </div>
                     </div>
                 </div>
-                <div class="content__row">
+                <div v-else class="content__row" >
                     <div class="cart__empty">
                         <div class="title">
                             <app-ui-icon :icon="'i-cart'" :style="'font-size: 32px; opacity: 0.7;'" />
@@ -60,7 +61,7 @@
                 </div>
             </div>
         </section>
-        <section v-if="cartItems.length" class="section total__amount">
+        <section v-if="cartProducts.length" class="section total__amount">
             <div class="content">
                 <div class="content__row">
                     <h2 class="title">Cart totals</h2>
@@ -93,6 +94,8 @@
                 </div>
             </div>
         </section>
+
+        
     </div>
 </template>
 
@@ -101,7 +104,7 @@ import { computed } from "vue";
 import { useStore } from 'vuex';
 
 const store = useStore();
-const cartItems = computed(() => store.getters["appCart/GET_CART"])
+const cartProducts = computed(() => store.getters["appCart/GET_CART"])
 
 const itemsQuantity = computed(() => store.getters['appCart/GET_ITEMS_QUANTITY']);
 const totalSale = computed(() => store.getters['appCart/GET_TOTAL_PRICE_WITHOUT_SALE']);
@@ -119,9 +122,13 @@ const removeItem = (event) => {
 .section__content {
     display: flex;
     align-items: start;
+
+    @media (max-width: 991px) {
+        flex-direction: column;
+    }
 }
 .section.cart {
-    flex: 0 0 80%;
+    width: 100%;
     .content {
         .content__row {
             padding: 10px 50px;
@@ -133,15 +140,36 @@ const removeItem = (event) => {
                 padding: 25px 10px;
                 transition: all .2s ease-in-out;
 
+                .item__wrapper {
+                    display: flex;
+                    align-items: start;
+                    width: 100%;
+                }
+
                 .item__media {
                     width: 200px;
                     height: 200px;
+                    min-width: 200px;
                     margin-right: 40px;
 
                     img {
                         width: 100%;
                         height: 100%;
                         object-fit: cover;
+                    }
+
+                    @media (max-width: 746px) {
+                        width: 150px;
+                        height: 150px;
+                        min-width: 150px;
+                        margin-right: 15px;
+                        margin-bottom: 20px;
+                    }
+
+                    @media (max-width: 524px) {
+                        width: 100px;
+                        height: 100px;
+                        min-width: 100px;
                     }
                 }
 
@@ -151,12 +179,11 @@ const removeItem = (event) => {
                     align-items: start;
                     justify-content: space-between;
                     padding: 5px 0;
-                    width: 30%;
                     height: 200px;
                     min-width: 200px;
 
                     .item__header_name {
-                        margin-bottom: 20px;
+                        margin-bottom: 5px;
 
                         a {
                             cursor: pointer;
@@ -168,7 +195,24 @@ const removeItem = (event) => {
                             &:hover {
                                 color: vars.$color-g-primary;
                             }
+
+                            @media (max-width: 991px) {
+                                font-size: 18px;
+                            }
+
+                            @media (max-width: 546px) {
+                                font-size: 16px;
+                            }
                         }
+                    }
+
+                    .item__header_article {
+                        cursor: pointer;
+                        display: block;
+                        margin-bottom: 20px;
+                        font-size: 14px;
+                        font-weight: 500;
+                        color: vars.$color-app-bg-gray;
                     }
 
                     .price {
@@ -198,6 +242,10 @@ const removeItem = (event) => {
                                 border-radius: 2px;
                                 background-color: vars.$color-app-text-04;
                             }
+
+                            @media (max-width: 746px) {
+                                font-size: 17px;
+                            }
                         }
 
                         .price__curr_price {
@@ -205,7 +253,28 @@ const removeItem = (event) => {
                             font-weight: 700;
                             padding: 10px 0;
                             color: vars.$color-g-text;
+
+                            @media (max-width: 746px) {
+                                font-size: 18px;
+                            }
                         }
+
+                        @media (max-width: 524px) {
+                            position: absolute;
+                            bottom: 0;
+                            right: 0;
+                            margin: 0 30px 25px 0;
+                            padding: 5px 0;
+                        }
+                    }
+
+                    @media (max-width: 746px) {
+                        height: 150px;
+                        width: 100%;
+                    }
+
+                    @media (max-width: 524px) {
+                        height: 100%;
                     }
                 }
 
@@ -213,6 +282,14 @@ const removeItem = (event) => {
                     flex: 0 0 20%;
                     display: flex;
                     align-items: center;
+
+                    @media (max-width: 991px) {
+                        width: 100%;
+                    }
+
+                    @media (max-width: 524px) {
+                        display: none;
+                    }
                 }
 
                 .item__quan {
@@ -234,6 +311,10 @@ const removeItem = (event) => {
 
                 &:hover {
                     background-color: rgba(0, 0, 0, .05);
+                }
+
+                @media (max-width: 746px) {
+                    flex-wrap: wrap;
                 }
             }
 
@@ -257,13 +338,22 @@ const removeItem = (event) => {
                     
                 }
             }
+
+            @media (max-width: 1024px) {
+                padding: 10px 0;
+            }
         }
+    }
+
+    @media (max-width: 991px) {
+        margin-bottom: 40px;
     }
 }
 .section.total__amount {
     position: relative;
-    flex: 0 0 20%;
     padding: 20px;
+    width: 310px;
+    min-width: 310px;
     border: 1px solid vars.$color-g-gray;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 
@@ -332,6 +422,14 @@ const removeItem = (event) => {
                 margin: 40px 0;
             }
         }
+    }
+
+    @media (max-width: 991px) {
+        width: 60%;
+    }
+
+    @media (max-width: 524px) {
+        width: 100%;
     }
 }
 </style>
