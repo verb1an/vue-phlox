@@ -19,17 +19,18 @@
                             </template>
                         </app-ui-input>
                     </form>
-                </div> 
+                </div>
                 <div class="content__row">
                     <app-menu-catalog :title="'Product categories'" :menu="defMenu" />
                 </div>
                 <div class="content__row">
-                    <app-menu-catalog :title="'Choose price'">
-                        <template #content>
-                            <!-- ! Need final -->
-                            <!-- <app-ui-input-range /> -->
-                        </template>
-                    </app-menu-catalog>
+                    <app-menu-catalog
+                        :title="'Choose price'"
+                        :menu="filters.price"
+                        :multyMenu="true"
+                        :queryType="'price'"
+                        @filters:change="changeFilters"
+                    />
                 </div>
             </div>
         </section>
@@ -55,15 +56,17 @@
 </template>
 
 <script setup>
-// import axios from 'axios';
+import { onMounted, ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+
+const route = useRoute();
+const router = useRouter();
+
 const meta = {
     page: 1,
     totalArt: 10,
     limit: 9,
 };
-
-// const response = axios.get("@/server/catalog.json");
-// console.log(response);
 
 const defMenu = [
     {
@@ -84,7 +87,7 @@ const defMenu = [
     },
     {
         title: "Laptop",
-        path: "/shop/laptop/",
+        path: "/shop/laptops/",
     },
     {
         title: "Speaker",
@@ -95,11 +98,12 @@ const defMenu = [
         path: "/shop/uncategorized/",
     },
 ];
+
 const catalog = [
     {
         id: 4,
         article: "ql4ieyn0",
-        name: "\"15.6\" Ноутбук ASUS VivoBook 15 OLED K513EA-L13069 черный",
+        name: '"15.6" Ноутбук ASUS VivoBook 15 OLED K513EA-L13069 черный',
         description:
             "ASUS VivoBook 15 K513 – это яркий ноутбук, который добавит динамизма и стиля в твою повседневную жизнь. Конфигурация с процессором Intel Core i5 и видеокартой Intel Iris Xe Graphics обеспечит всю необходимую для дел вычислительную мощность, а для хранения файлов предлагется высокоскоростной твердотельный накопитель и дополнительный слот для установки традиционного жесткого диска большой емкости.",
         img: [
@@ -117,7 +121,7 @@ const catalog = [
             "https://c.dns-shop.ru/thumb/st4/fit/500/500/2303e0b329d23914449987dfb9b28c8e/c7c56b434112f9205596401efa1848976207c7ef44e47766b021e49826badac5.jpg.webp",
             "https://c.dns-shop.ru/thumb/st1/fit/500/500/b1288946dabbc4346235b5c84fa39022/3f91a9ea4b5566796aeea536d87a20a93384a1a041e9fa25c276127bc4efe642.jpg.webp",
             "https://c.dns-shop.ru/thumb/st1/fit/500/500/db99bd021ce4f49ede4e0903207c39ac/73b1ea2ebff0a2096b5458340686ec41c757db16003ce75d57c17da655f647b8.jpg.webp",
-            "https://c.dns-shop.ru/thumb/st4/fit/500/500/93cc1778198f08bec9713264fcf6aee0/bedeeb3668700fe6bc4f73bf8057057797cbf4a5408f1170210f5d2825988f94.jpg.webp"
+            "https://c.dns-shop.ru/thumb/st4/fit/500/500/93cc1778198f08bec9713264fcf6aee0/bedeeb3668700fe6bc4f73bf8057057797cbf4a5408f1170210f5d2825988f94.jpg.webp",
         ],
         price_original: 1139,
         price_current: 1139,
@@ -126,12 +130,12 @@ const catalog = [
         rating: 4,
         reviews: 71,
         category: ["computers", "laptops"],
-        breadcrumbs: ["computers", "laptops", "4-\"15.6\" Ноутбук ASUS VivoBook 15 OLED K513EA-L13069 черный"]
+        breadcrumbs: ["computers", "laptops", '4-"15.6" Ноутбук ASUS VivoBook 15 OLED K513EA-L13069 черный'],
     },
     {
         id: 4,
         article: "ql4ieyn0",
-        name: "\"15.6\" Ноутбук ASUS VivoBook 15 OLED K513EA-L13069 черный",
+        name: '"15.6" Ноутбук ASUS VivoBook 15 OLED K513EA-L13069 черный',
         description:
             "ASUS VivoBook 15 K513 – это яркий ноутбук, который добавит динамизма и стиля в твою повседневную жизнь. Конфигурация с процессором Intel Core i5 и видеокартой Intel Iris Xe Graphics обеспечит всю необходимую для дел вычислительную мощность, а для хранения файлов предлагется высокоскоростной твердотельный накопитель и дополнительный слот для установки традиционного жесткого диска большой емкости.",
         img: [
@@ -149,7 +153,7 @@ const catalog = [
             "https://c.dns-shop.ru/thumb/st4/fit/500/500/2303e0b329d23914449987dfb9b28c8e/c7c56b434112f9205596401efa1848976207c7ef44e47766b021e49826badac5.jpg.webp",
             "https://c.dns-shop.ru/thumb/st1/fit/500/500/b1288946dabbc4346235b5c84fa39022/3f91a9ea4b5566796aeea536d87a20a93384a1a041e9fa25c276127bc4efe642.jpg.webp",
             "https://c.dns-shop.ru/thumb/st1/fit/500/500/db99bd021ce4f49ede4e0903207c39ac/73b1ea2ebff0a2096b5458340686ec41c757db16003ce75d57c17da655f647b8.jpg.webp",
-            "https://c.dns-shop.ru/thumb/st4/fit/500/500/93cc1778198f08bec9713264fcf6aee0/bedeeb3668700fe6bc4f73bf8057057797cbf4a5408f1170210f5d2825988f94.jpg.webp"
+            "https://c.dns-shop.ru/thumb/st4/fit/500/500/93cc1778198f08bec9713264fcf6aee0/bedeeb3668700fe6bc4f73bf8057057797cbf4a5408f1170210f5d2825988f94.jpg.webp",
         ],
         price_original: 1139,
         price_current: 1139,
@@ -158,12 +162,12 @@ const catalog = [
         rating: 4,
         reviews: 71,
         category: ["computers", "laptops"],
-        breadcrumbs: ["computers", "laptops", "4-\"15.6\" Ноутбук ASUS VivoBook 15 OLED K513EA-L13069 черный"]
+        breadcrumbs: ["computers", "laptops", '4-"15.6" Ноутбук ASUS VivoBook 15 OLED K513EA-L13069 черный'],
     },
     {
         id: 4,
         article: "ql4ieyn0",
-        name: "\"15.6\" Ноутбук ASUS VivoBook 15 OLED K513EA-L13069 черный",
+        name: '"15.6" Ноутбук ASUS VivoBook 15 OLED K513EA-L13069 черный',
         description:
             "ASUS VivoBook 15 K513 – это яркий ноутбук, который добавит динамизма и стиля в твою повседневную жизнь. Конфигурация с процессором Intel Core i5 и видеокартой Intel Iris Xe Graphics обеспечит всю необходимую для дел вычислительную мощность, а для хранения файлов предлагется высокоскоростной твердотельный накопитель и дополнительный слот для установки традиционного жесткого диска большой емкости.",
         img: [
@@ -181,7 +185,7 @@ const catalog = [
             "https://c.dns-shop.ru/thumb/st4/fit/500/500/2303e0b329d23914449987dfb9b28c8e/c7c56b434112f9205596401efa1848976207c7ef44e47766b021e49826badac5.jpg.webp",
             "https://c.dns-shop.ru/thumb/st1/fit/500/500/b1288946dabbc4346235b5c84fa39022/3f91a9ea4b5566796aeea536d87a20a93384a1a041e9fa25c276127bc4efe642.jpg.webp",
             "https://c.dns-shop.ru/thumb/st1/fit/500/500/db99bd021ce4f49ede4e0903207c39ac/73b1ea2ebff0a2096b5458340686ec41c757db16003ce75d57c17da655f647b8.jpg.webp",
-            "https://c.dns-shop.ru/thumb/st4/fit/500/500/93cc1778198f08bec9713264fcf6aee0/bedeeb3668700fe6bc4f73bf8057057797cbf4a5408f1170210f5d2825988f94.jpg.webp"
+            "https://c.dns-shop.ru/thumb/st4/fit/500/500/93cc1778198f08bec9713264fcf6aee0/bedeeb3668700fe6bc4f73bf8057057797cbf4a5408f1170210f5d2825988f94.jpg.webp",
         ],
         price_original: 1139,
         price_current: 1139,
@@ -190,12 +194,12 @@ const catalog = [
         rating: 4,
         reviews: 71,
         category: ["computers", "laptops"],
-        breadcrumbs: ["computers", "laptops", "4-\"15.6\" Ноутбук ASUS VivoBook 15 OLED K513EA-L13069 черный"]
+        breadcrumbs: ["computers", "laptops", '4-"15.6" Ноутбук ASUS VivoBook 15 OLED K513EA-L13069 черный'],
     },
     {
         id: 4,
         article: "ql4ieyn0",
-        name: "\"15.6\" Ноутбук ASUS VivoBook 15 OLED K513EA-L13069 черный",
+        name: '"15.6" Ноутбук ASUS VivoBook 15 OLED K513EA-L13069 черный',
         description:
             "ASUS VivoBook 15 K513 – это яркий ноутбук, который добавит динамизма и стиля в твою повседневную жизнь. Конфигурация с процессором Intel Core i5 и видеокартой Intel Iris Xe Graphics обеспечит всю необходимую для дел вычислительную мощность, а для хранения файлов предлагется высокоскоростной твердотельный накопитель и дополнительный слот для установки традиционного жесткого диска большой емкости.",
         img: [
@@ -213,7 +217,7 @@ const catalog = [
             "https://c.dns-shop.ru/thumb/st4/fit/500/500/2303e0b329d23914449987dfb9b28c8e/c7c56b434112f9205596401efa1848976207c7ef44e47766b021e49826badac5.jpg.webp",
             "https://c.dns-shop.ru/thumb/st1/fit/500/500/b1288946dabbc4346235b5c84fa39022/3f91a9ea4b5566796aeea536d87a20a93384a1a041e9fa25c276127bc4efe642.jpg.webp",
             "https://c.dns-shop.ru/thumb/st1/fit/500/500/db99bd021ce4f49ede4e0903207c39ac/73b1ea2ebff0a2096b5458340686ec41c757db16003ce75d57c17da655f647b8.jpg.webp",
-            "https://c.dns-shop.ru/thumb/st4/fit/500/500/93cc1778198f08bec9713264fcf6aee0/bedeeb3668700fe6bc4f73bf8057057797cbf4a5408f1170210f5d2825988f94.jpg.webp"
+            "https://c.dns-shop.ru/thumb/st4/fit/500/500/93cc1778198f08bec9713264fcf6aee0/bedeeb3668700fe6bc4f73bf8057057797cbf4a5408f1170210f5d2825988f94.jpg.webp",
         ],
         price_original: 1139,
         price_current: 1139,
@@ -222,9 +226,65 @@ const catalog = [
         rating: 4,
         reviews: 71,
         category: ["computers", "laptops"],
-        breadcrumbs: ["computers", "laptops", "4-\"15.6\" Ноутбук ASUS VivoBook 15 OLED K513EA-L13069 черный"]
-    }
+        breadcrumbs: ["computers", "laptops", '4-"15.6" Ноутбук ASUS VivoBook 15 OLED K513EA-L13069 черный'],
+    },
 ];
+const filters = ref({
+    price: [
+        {
+            title: "0 - 19$",
+            path: "0-19",
+            doubt: false,
+        },
+        {
+            title: "20 - 49$",
+            path: "20-49",
+            doubt: false,
+        },
+        {
+            title: "50 - 99$",
+            path: "50-99",
+            doubt: false,
+        },
+    ]
+});
+
+const changeFilters = (newFilterValue) => {
+    filters.value[newFilterValue.queryType][newFilterValue.index].doubt = newFilterValue.value;
+    pushFilters(newFilterValue.queryType);
+}
+
+const setFilters = () =>  {
+    const routeFilter = route.query;
+    for(let key in routeFilter) {
+        const subRouteFilters = routeFilter[key].split(',');
+        subRouteFilters.forEach((el) => {
+            filters.value[key].forEach((targetEl) => {
+                if(el === targetEl.path) {
+                    targetEl.doubt = true;
+                }else targetEl.doubt = false;
+            })
+        })
+    }
+}
+
+const pushFilters = (type) => {
+    let filterToQuery = '';
+    filters.value[type].forEach((el) => {
+        if(el.doubt) {
+            if(filterToQuery.length) filterToQuery += ',';
+            filterToQuery += el.path;
+        }
+    })
+
+    let wrapperQuery = new Object();
+    wrapperQuery[type] = filterToQuery;
+    router.push({query: wrapperQuery});
+};
+
+onMounted(() => {
+    setFilters();
+})
 </script>
 
 <style lang="scss" scoped>

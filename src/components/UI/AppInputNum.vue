@@ -1,6 +1,6 @@
 <template>
     <div class="app__input_num ui__component">
-        <label class="component__wrapper">
+        <label class="component__wrapper" :style="wrapStyle">
             <app-ui-btn @click="returnValue(modelValue - 1)">
                 <div class="input__num_control minus">
                     <span></span>
@@ -43,16 +43,19 @@ const props = defineProps({
     },
     max: Number,
     min: Number,
+    readonly: {type: Boolean, default: false},
+    wrapStyle: String
 });
 const emit = defineEmits(["input", "changeValue"]);
 
 const returnValue = (value) => {
+    if(props.readonly) return;
     emit("update:modelValue", Number(value));
 };
 
 /* 
     <!-- ? Important ! -->
-    <!-- ? Use 2 input on 1 page and work reactive values - max, min should be the same for both -->
+    <!-- ? Use 2 input on 1 page and work reactive values - (max), (min) should be the same for both -->
 */ 
 watch(() => props.modelValue, () => {
     if(isNaN(props.modelValue)) returnValue(props.min ?? 0);

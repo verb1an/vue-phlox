@@ -28,13 +28,16 @@ export default {
 };
 </script>
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted } from 'vue';
 const props = defineProps({
-    modelValue: { type: Number, default: 4 },
+    modelValue: { type: Number, default: 0},
+    readonly: {type: Boolean, default: false}
 });
 const emit  = defineEmits(["update:modelValue"])
 const stars = ref(null);
+
 const starEventEnter = (event) => {
+    if(props.readonly) return;
     stars.value.forEach((el) =>
         event.target.getAttribute("data-star-count") >= el.getAttribute("data-star-count")
             ? el.classList.add("active")
@@ -42,13 +45,16 @@ const starEventEnter = (event) => {
     );
 };
 const starEventLeave = () => {
+    if(props.readonly) return;
     stars.value.forEach((el) => el.classList.remove('active'));
     if (props.modelValue !== 0) setDefaultValue(props.modelValue);
 };
+
 const setDefaultValue = (value) => {
     for (let i = 0; i < value; i++) stars.value[i].classList.add("active");
 };
 const setUserRatingValue = (event) => {
+    if(props.readonly) return;
     emit("update:modelValue", event.target.closest('.rating__star').getAttribute('data-star-count'));
 }
 

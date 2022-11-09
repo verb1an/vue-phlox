@@ -1,15 +1,28 @@
 <template>
-    <nav class="app__menu_catalog component">
+    <nav class="app__menu_catalog component" :class="multyMenu ? 'multy' : ''">
         <div class="menu__wrapper">
-            <div @click="showHideMenu" class="menu__title">
+            <div v-if="$props.title" @click="showHideMenu" class="menu__title">
                 <h3>{{ title }}</h3>
             </div>
-            <ul v-if="!$slots.content" class="_toggle_hidden">
-                <li v-for="item in menu" :key="item.path">
-                    <router-link :to="item.path">{{ item.title }}</router-link>
+            <ul v-if="$props.menu" class="_toggle_hidden">
+                <li v-for="(value, index) in menu" :key="value.path">
+                    <a v-if="multyMenu" class="menu__multy_item">
+                        <input
+                            type="checkbox"
+                            name=""
+                            :id="`menu__item_checkbox-${value.path}`"
+                            :data-index="index"
+                            :checked="value.doubt"
+                            @change="changeFilterValue"
+                        />
+                        <label :for="`menu__item_checkbox-${value.path}`">
+                            {{ value.title }}
+                        </label>
+                    </a>
+                    <router-link v-else :to="value.path">{{ value.title }}</router-link>
                 </li>
             </ul>
-            <div v-else class="content _toggle_hidden">
+            <div v-if="$slots.content" class="content _toggle_hidden">
                 <slot name="content"></slot>
             </div>
         </div>
@@ -23,10 +36,13 @@ export default {
 </script>
 
 <script setup>
-defineProps({
+const props = defineProps({
     title: String,
     menu: Array,
+    multyMenu: { type: Boolean, default: false },
+    queryType: String,
 });
+const emit = defineEmits(["filters:change"])
 
 const showHideMenu = (event) => {
     const targetElement = event.target.closest(".component").children[0].children[1];
@@ -43,9 +59,18 @@ const showHideMenu = (event) => {
 
     targetElement.classList.toggle("_show");
     targetElement.classList.contains("_show")
-        ? (targetElement.style = `height: ${showedTargetHeight+25}px`) // <!-- 50px for something wrong -->
+        ? (targetElement.style = `height: ${showedTargetHeight + 25}px`) // <!-- 50px for something wrong -->
         : (targetElement.style = ""); // <!-- ? mt10 + h18.4 -->
 };
+
+const changeFilterValue = (event) => {
+    emit("filters:change", {
+        queryType: props.queryType,
+        index: event.target.getAttribute('data-index'),
+        value: event.target.checked
+    })
+}
+
 </script>
 
 <style lang="scss" scoped>
@@ -70,18 +95,32 @@ const showHideMenu = (event) => {
         ul {
             list-style: none;
             li {
-                margin-top: 10px;
-                padding: 0 40px;
                 a {
+                    display: block;
                     font-size: 16px;
                     font-weight: 500;
                     color: vars.$color-app-text-06;
                     transition: all 0.2s ease-in-out;
+                    padding: 10px 25px;
+                    border-radius: 4px;
+
+                    &.menu__multy_item {
+                        display: flex;
+                        align-items: center;
+
+                        label {
+                            cursor: pointer;
+                            display: block;
+                            padding-left: 10px;
+                            user-select: none;
+                        }
+                    }
                 }
 
                 &:hover {
                     a {
                         color: vars.$color-g-primary;
+                        background-color: rgba(0, 0, 0, 0.1);
                     }
                 }
             }

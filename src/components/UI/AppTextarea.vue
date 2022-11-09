@@ -1,12 +1,12 @@
 <template>
-    <div class="app__input ui__component">
-        <label class="component__wrapper">
+    <div class="app__textarea ui__component">
+        <label class="component__wrapper" :style="wrapStyle">
             <div class="textarea__wrapper">
                 <textarea 
                     :placeholder="placeholder"
                     :style="`resize: ${resize}; ${style}`"
                     :modelValue="value"
-                    
+                    :id="id"
                     @input="returnValue"
                     @change="returnValue"
                 ></textarea>
@@ -25,8 +25,10 @@ export default {
 defineProps({
     resize: {String, default: 'none'},
     value: String,
+    id: String,
     placeholder: String,
-    style: String
+    style: String,
+    wrapStyle: String
 })
 
 const emit = defineEmits(['input', 'sumbit']);
@@ -37,14 +39,14 @@ const returnValue = (event) => {
 
 <style lang="scss" scoped>
 @use '@/assets/scss/vars';
-.app__input{
+.app__textarea{
     .component__wrapper{
         background-image: vars.$gradient-gray-light-gray-273;
-        border-radius: 25px;
         display: flex;
         align-items: center;
         padding: 8px;
         max-width: 100%;
+        height: 100%;
     }
     
     .textarea__wrapper {

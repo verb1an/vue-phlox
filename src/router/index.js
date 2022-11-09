@@ -23,11 +23,15 @@ const routes = [
         component: CatalogPage,
         name: 'Shop',
         meta: {
-            title: "Shop",
-            // ! Need final this idea or think up something else or delete
-            breadcrumb: [
-                {name: "Home"}
-            ]
+            title: "Shop"
+        }
+    },
+    {
+        path: '/shop/:category/',
+        component: CatalogPage,
+        name: 'Category',
+        meta: {
+            title: "Shop"
         }
     },
     {
@@ -70,6 +74,7 @@ const routes = [
             title: "Cart"
         }
     },
+    // ! Need final
     // {
     //     path: '*',
     //     component: AppErrorPage,

@@ -1,12 +1,13 @@
 <template>
     <div class="app__input ui__component">
-        <label class="component__wrapper">
+        <label class="component__wrapper" :style="wrapStyle">
             <div class="input__wrapper">
                 <input
                     :type="type"
                     :value="modelValue"
                     :placeholder="placeholder"
                     :style="style"
+                    :id="id"
                     @input="returnValue"
                     @change="returnValue"
                 />
@@ -28,9 +29,11 @@ export default {
 <script setup>
 const props = defineProps({
     type: { type: String, default: "text" },
+    id: String,
     modelValue: String,
     placeholder: String,
     style: String,
+    wrapStyle: String
 });
 
 const emit = defineEmits(["input", "sumbit"]);
@@ -59,6 +62,7 @@ const validateNumber = (value) => {
 
     .input__wrapper {
         width: 100%;
+        height: 100%;
 
         input {
             border: 0;
