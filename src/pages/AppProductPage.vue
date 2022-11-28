@@ -3,7 +3,13 @@
         <div class="content">
             <div class="content__row">
                 <div class="product__media">
-                    <app-section-slider :slides="product.img" />
+                    <swiper>   
+                        <swiper-slide v-for="img in product.img" :key="img">
+                            <div class="media__item">
+                                <img :src="img" alt="product">
+                            </div>
+                        </swiper-slide>
+                    </swiper>
                 </div>
                 <div class="product__content">
                     <div class="product__header">
@@ -131,19 +137,19 @@
                                 <h2 class="title">Add your review</h2>
                                 <h3 class="subtitle">Your email address will not be published. Required fields are marked *</h3>
                                 <form action="#" class="form__add_review">
-                                    <div style="width: 100%;">
+                                    <div class="form__input_label">
                                         <label for="">Your rating *</label>
                                         <app-ui-input-rating />
                                     </div>
-                                    <div style="width: 50%;">
+                                    <div class="form__input_label">
                                         <label for="review__input_author_name">Name *</label>
                                         <app-ui-input :id="'review__input_author_name'" :wrapStyle="'border-radius: 25px;'" />
                                     </div>
-                                    <div style="width: 50%;">
+                                    <div class="form__input_label">
                                         <label for="review__input_author_mail">Email *</label>
                                         <app-ui-input :id="'review__input_author_mail'" :wrapStyle="'border-radius: 25px;'" />
                                     </div>
-                                    <div  style="width: 100%;">
+                                    <div class="form__input_label">
                                         <label for="review__input_text">Your review *</label>
                                         <app-ui-textarea :id="'review__input_text'" :wrapStyle="'border-radius: 25px;'" />
                                     </div>
@@ -159,7 +165,9 @@
     </section>
     <section class="section related__products">
         <div class="content">
-            <div class="content__row"></div>
+            <div class="content__row">
+                
+            </div>
         </div>
     </section>
 </template>
@@ -167,6 +175,8 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import { useStore } from "vuex";
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/css';
 
 const store = useStore();
 
@@ -352,6 +362,41 @@ onMounted(() => {
             display: flex;
             align-items: start;
             .product__media {
+                width: 60%;
+                height: 100%;
+                overflow: hidden;
+
+                .media__item {
+                    width: 100%;
+                    height: 100%;
+                    min-height: 600px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background-color: vars.$color-g-gray-light;
+                    border-radius: 25px;
+
+                    img {
+                        height: 100%;
+
+                        @media (max-width: 767px) {
+                            width: 100%;
+                        }
+                    }
+
+                    @media (max-width: 767px) {
+                        min-height: 440px;
+                    }
+                }
+
+                @media (max-width: 991px) {
+                    width: 100%;
+                }
+
+                @media (max-width: 767px) {
+                    max-height: 600px;
+                    margin-bottom: 40px;
+                }
             }
 
             .product__content {
@@ -362,6 +407,10 @@ onMounted(() => {
                     font-weight: 700;
                     color: vars.$color-g-text;
                     margin-bottom: 25px;
+
+                    @media (max-width: 767px) {
+                        font-size: 24px;
+                    }
                 }
 
                 .rating {
@@ -409,6 +458,14 @@ onMounted(() => {
                         color: vars.$color-g-primary;
                     }
                 }
+
+                @media (max-width: 767px) {
+                    padding: 20px 5%;
+                }
+            }
+
+            @media (max-width: 991px) {
+                flex-direction: column;
             }
         }
     }
@@ -499,6 +556,7 @@ onMounted(() => {
                             font-size: 14px;
                             font-weight: 400;
                             color: vars.$color-g-text;
+                            text-align: right;
                         }
                     }
                 }
@@ -558,6 +616,14 @@ onMounted(() => {
                                 }
                             }
                         }
+
+                        @media (max-width: 767px) {
+                            flex-direction: column;
+                        }
+                    }
+
+                    @media (max-width: 767px) {
+                        padding: 25px 15px;
                     }
                 }
 
@@ -566,20 +632,34 @@ onMounted(() => {
                         display: flex;
                         flex-wrap: wrap;
 
-                        div {
+                        .form__input_label {
                             padding: 10px;
 
                             .app__input {
                                 height: 72px;
+                                width: 100%;
                             }
 
                             .app__textarea {
                                 height: 200px;
+                                width: 100%;
                             }
 
-                            &:first-child {
+                            &:nth-child(1) {
                                 display: flex;
                                 align-items: center;
+                                width: 100%;
+                            }
+                            &:nth-child(2),
+                            &:nth-child(3) {
+                                width: 50%;
+
+                                @media (max-width: 767px) {
+                                    width: 100%;
+                                }
+                            }
+                            &:nth-child(4) {
+                                width: 100%;
                             }
                         }
                     }
@@ -590,6 +670,10 @@ onMounted(() => {
                 height: 100%;
                 opacity: 1;
             }
+        }
+
+        @media (max-width: 767px) {
+            margin: 20px 5%;
         }
     }
 

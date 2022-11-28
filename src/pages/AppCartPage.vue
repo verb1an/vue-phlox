@@ -1,4 +1,5 @@
 <template>
+    <app-s-breadcrumbs :breadcrumbs="breadcrumbs" />
     <div class="section__content">
         <section class="section cart">
             <div class="content">
@@ -114,7 +115,12 @@ const removeItem = (event) => {
     const productId = event.target.closest(".product").getAttribute('data-product');
     store.dispatch("appCart/REMOVE_ITEM", productId)
 }
-
+const breadcrumbs = [
+    {
+        title: "Cart",
+        path: "/cart/"
+    }
+]
 </script>
 
 <style lang="scss" scoped>

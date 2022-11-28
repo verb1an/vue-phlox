@@ -4,10 +4,11 @@ import CatalogPage from '@/pages/AppCatalogPage'
 import ProductPage from '@/pages/AppProductPage'
 import AboutPage from '@/pages/AppAboutPage'
 import BlogPage from '@/pages/AppBlogPage'
+import BlogItemPage from '@/pages/AppBlogItemPage'
 import ContactPage from '@/pages/AppContactPage'
 import CartPage from '@/pages/AppCartPage'
 
-// import AppErrorPage from '@/pages/AppErrorPage'
+import ErrorPage from '@/pages/AppErrorPage'
 
 const routes = [
     {
@@ -59,6 +60,22 @@ const routes = [
         }
     },
     {
+        path: '/blog/:category/',
+        component: BlogPage,
+        name: 'BlogCategory',
+        meta: {
+            title: "Blog"
+        }
+    },
+    {
+        path: '/blog/:category/:id',
+        component: BlogItemPage,
+        name: 'BlogItem',
+        meta: {
+            title: "Blog"
+        }
+    },
+    {
         path: '/contact-us/',
         component: ContactPage,
         name: 'Contact',
@@ -75,14 +92,13 @@ const routes = [
         }
     },
     // ! Need final
-    // {
-    //     path: '*',
-    //     component: AppErrorPage,
-    //     name: '404 page',
-    //     meta: {
-    //         title: "404"
-    //     }
-    // }
+    {
+        path: '/404/',
+        component: ErrorPage,
+    }, {
+        path:'/:pathMatch(.*)*',
+        redirect: "/404/"
+    }
 ]
 
 const router = createRouter({

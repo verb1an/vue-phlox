@@ -42,7 +42,7 @@
                 class="_full _full-screen _fade-left-skew"
             >
                 <template #close>
-                    <app-ui-btn style="float: right" class="btn__popap_close">
+                    <app-ui-btn class="btn__popap_close">
                         <app-ui-icon :icon="'i-close'" />
                     </app-ui-btn>
                 </template>

@@ -2,7 +2,9 @@
     <article class="app__blog_item component">
         <div class="item__wrapper">
             <div class="item__media">
-                <img :src="require('@/' + item.img)" alt="" />
+                <router-link :to="`/blog/${item.category}/${item.id}`">
+                    <img :src="require('@/' + item.img)" alt="blog computers" />
+                </router-link>
             </div>
             <div class="item__main">
                 <div class="item__info">

@@ -41,7 +41,7 @@ const props = defineProps({
     design: String,
     stopScroll: { type: Boolean, default: true },
 });
-const emit = defineEmits(["popap:close"]);
+const emit = defineEmits(["popap:close", "popap:open"]);
 
 if (props.stopScroll)
     watch(
@@ -77,6 +77,10 @@ const onBtnClose = (event) => {
         box-shadow: 0 0 14px rgba(0, 0, 0, 0.3);
         max-width: 100%;
         width: 600px;
+
+        .popap__close {
+            float: right;
+        }
 
         .popap__title {
             font-size: 18px;

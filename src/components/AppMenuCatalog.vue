@@ -1,30 +1,37 @@
 <template>
     <nav class="app__menu_catalog component" :class="multyMenu ? 'multy' : ''">
         <div class="menu__wrapper">
-            <div v-if="$props.title" @click="showHideMenu" class="menu__title">
+            <div @click="showHideMenu" class="menu__title">
                 <h3>{{ title }}</h3>
             </div>
-            <ul v-if="$props.menu" class="_toggle_hidden">
-                <li v-for="(value, index) in menu" :key="value.path">
-                    <a v-if="multyMenu" class="menu__multy_item">
-                        <input
-                            type="checkbox"
-                            name=""
-                            :id="`menu__item_checkbox-${value.path}`"
-                            :data-index="index"
-                            :checked="value.doubt"
-                            @change="changeFilterValue"
-                        />
-                        <label :for="`menu__item_checkbox-${value.path}`">
-                            {{ value.title }}
-                        </label>
-                    </a>
-                    <router-link v-else :to="value.path">{{ value.title }}</router-link>
-                </li>
-            </ul>
-            <div v-if="$slots.content" class="content _toggle_hidden">
-                <slot name="content"></slot>
+
+            <div class="menu__content _toggle_hidden">
+                <div v-if="$slots.preContent" class="pre__content">
+                    <slot name="preContent"></slot>
+                </div>
+                <ul v-if="$props.menu" class="">
+                    <li v-for="(value, index) in menu" :key="index" :class="value.hide ? 'hide' : ''">
+                        <a v-if="multyMenu" class="menu__multy_item" >
+                            <input
+                                type="checkbox"
+                                name="filters__price_input"
+                                :id="`menu__item_checkbox-${value.path}`"
+                                :data-index="index"
+                                :checked="value.doubt"
+                                @change="changeFilterValue"
+                            />
+                            <label :for="`menu__item_checkbox-${value.path}`">
+                                {{ value.title }}
+                            </label>
+                        </a>
+                        <router-link v-else :to="value.path">{{ value.title }}</router-link>
+                    </li>
+                </ul>
+                <div v-if="$slots.content" class="content">
+                    <slot name="content"></slot>
+                </div>
             </div>
+            
         </div>
     </nav>
 </template>
@@ -37,7 +44,7 @@ export default {
 
 <script setup>
 const props = defineProps({
-    title: String,
+    title: {type: String, required: true},
     menu: Array,
     multyMenu: { type: Boolean, default: false },
     queryType: String,
@@ -49,18 +56,12 @@ const showHideMenu = (event) => {
     let showedTargetHeight = 0;
     for (let i = 0; i < targetElement.children.length; i++) {
         showedTargetHeight += targetElement.children[i].offsetHeight;
-
-        const margin = window.getComputedStyle(targetElement.children[i], null).margin;
-        if (!margin || margin == "0px") continue;
-        console.log(margin);
-        const allMargins = margin.replaceAll("px", "").split(" ");
-        showedTargetHeight += Number.parseInt(allMargins[0]) + Number.parseInt(allMargins[2]); // <!-- ? Top and bottom -->
     }
 
     targetElement.classList.toggle("_show");
     targetElement.classList.contains("_show")
-        ? (targetElement.style = `height: ${showedTargetHeight + 25}px`) // <!-- 50px for something wrong -->
-        : (targetElement.style = ""); // <!-- ? mt10 + h18.4 -->
+        ? (targetElement.style = `height: ${showedTargetHeight + 25}px`) // <!-- 25px for something wrong -->
+        : (targetElement.style = "");
 };
 
 const changeFilterValue = (event) => {
@@ -122,6 +123,10 @@ const changeFilterValue = (event) => {
                         color: vars.$color-g-primary;
                         background-color: rgba(0, 0, 0, 0.1);
                     }
+                }
+
+                &.hide {
+                    display: none;
                 }
             }
         }

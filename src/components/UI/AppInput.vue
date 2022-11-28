@@ -10,6 +10,8 @@
                     :id="id"
                     @input="returnValue"
                     @change="returnValue"
+
+                    v-bind="$attrs"
                 />
             </div>
 
@@ -30,13 +32,13 @@ export default {
 const props = defineProps({
     type: { type: String, default: "text" },
     id: String,
-    modelValue: String,
+    modelValue: [String, Number],
     placeholder: String,
     style: String,
     wrapStyle: String
 });
 
-const emit = defineEmits(["input", "sumbit"]);
+const emit = defineEmits(["input", "sumbit", "update:modelValue"]);
 
 const returnValue = (event) => {
     if (props.type == "tel") event.target.value = validateNumber(event.target.value);

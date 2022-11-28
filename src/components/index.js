@@ -11,7 +11,7 @@ import AppSectionHeader from '@/sections/_AppSectionHeader'
 import AppSectionFSItem from '@/sections/_AppSectionFSItem'
 import AppSectionBlog from '@/sections/_AppSectionBlog'
 import AppSectionPrice from '@/sections/_AppSectionPrice'
-import AppSectionSlider from '@/sections/_AppSectionSlider'
+import AppSectionBreadCrumbs from '@/sections/_AppSectionBreadCrumbs'
 
 import AppCatalogProduct from '@/components/AppCatalogProduct'
 import AppTopicalItem from '@/components/AppTopicalItem'
@@ -40,7 +40,7 @@ export default [
     AppSectionFSItem,
     AppSectionBlog,
     AppSectionPrice,
-    AppSectionSlider,
+    AppSectionBreadCrumbs,
 
     AppCatalogProduct,
     AppTopicalItem,

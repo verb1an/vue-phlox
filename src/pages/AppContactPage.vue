@@ -1,4 +1,5 @@
 <template>
+    <app-s-breadcrumbs :breadcrumbs="breadcrumbs" />
     <div class="section__content">
         <section class="section contact__contact_interface">
             <section class="section feedback">
@@ -93,6 +94,13 @@ const feedbackMessage = ref({
     phone_number: "",
     message_text: "",
 });
+
+const breadcrumbs = [
+    {
+        title: "About Us",
+        path: "/about-us/"
+    }
+]
 </script>
 
 <style lang="scss" scoped>

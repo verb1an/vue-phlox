@@ -1,5 +1,7 @@
 <template>
+    <app-s-breadcrumbs :breadcrumbs="breadcrumbs" />
     <div class="section__content">
+        
         <section class="section filters">
             <div class="content">
                 <!-- ? Search block -->
@@ -30,12 +32,32 @@
                         :multyMenu="true"
                         :queryType="'price'"
                         @filters:change="changeFilters"
-                    />
+                    >
+                        <template #preContent>
+                            <div class="custom__price">
+                                <app-ui-input
+                                    :type="'tel'"
+                                    :placeholder="'from 0$'"
+                                    :wrapStyle="'border-radius: 26px;'"
+                                    data-custom-price-type="min"
+                                    @update:modelValue="filters.price[0].setMin"
+                                />
+                                <app-ui-input
+                                    :type="'tel'"
+                                    :placeholder="'to 9999$'"
+                                    :wrapStyle="'border-radius: 26px;'"
+                                    data-custom-price-type="max"
+                                    @update:modelValue="filters.price[0].setMax"
+                                />
+                            </div>
+                        </template>
+                    </app-menu-catalog>
                 </div>
             </div>
         </section>
 
         <section class="section catalog">
+            
             <app-section-header class="tal min">
                 <template #title>Shop</template>
                 <template #subtitle>
@@ -56,8 +78,8 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { onMounted, ref } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
 const route = useRoute();
 const router = useRouter();
@@ -229,8 +251,32 @@ const catalog = [
         breadcrumbs: ["computers", "laptops", '4-"15.6" Ноутбук ASUS VivoBook 15 OLED K513EA-L13069 черный'],
     },
 ];
+
+const breadcrumbs = [
+    {
+        title: "Product",
+        path: "/shop/"
+    }
+]
+
 const filters = ref({
     price: [
+        {
+            title: "",
+            path: "0-0",
+            doubt: false,
+            hide: true,
+            setMin(val) {
+                filters.value.price[0].path = `${val}-${filters.value.price[0].path.split("-")[1]}`;
+                filters.value.price.forEach((el) => el.doubt = false);
+                changeFilters({queryType: "price", index: 0, value: true})
+            },
+            setMax(val) {
+                filters.value.price[0].path = `${filters.value.price[0].path.split("-")[0]}-${val}`;
+                filters.value.price.forEach((el) => el.doubt = false);
+                changeFilters({queryType: "price", index: 0, value: true})
+            }
+        },
         {
             title: "0 - 19$",
             path: "0-19",
@@ -246,45 +292,47 @@ const filters = ref({
             path: "50-99",
             doubt: false,
         },
-    ]
+    ],
 });
 
 const changeFilters = (newFilterValue) => {
     filters.value[newFilterValue.queryType][newFilterValue.index].doubt = newFilterValue.value;
     pushFilters(newFilterValue.queryType);
-}
+};
 
-const setFilters = () =>  {
+const setFilters = () => {
     const routeFilter = route.query;
-    for(let key in routeFilter) {
-        const subRouteFilters = routeFilter[key].split(',');
+    for (let key in routeFilter) {
+        const subRouteFilters = routeFilter[key].split(",");
         subRouteFilters.forEach((el) => {
             filters.value[key].forEach((targetEl) => {
-                if(el === targetEl.path) {
+                if (el === targetEl.path) {
                     targetEl.doubt = true;
-                }else targetEl.doubt = false;
-            })
-        })
+                } else {
+                    targetEl.doubt = false;
+                }
+            });
+        });
     }
-}
+};
 
 const pushFilters = (type) => {
-    let filterToQuery = '';
+    let filterToQuery = "";
     filters.value[type].forEach((el) => {
-        if(el.doubt) {
-            if(filterToQuery.length) filterToQuery += ',';
+        if (el.doubt) {
+            if (filterToQuery.length) filterToQuery += ",";
             filterToQuery += el.path;
         }
-    })
+    });
 
     let wrapperQuery = new Object();
     wrapperQuery[type] = filterToQuery;
-    router.push({query: wrapperQuery});
+    router.push({ query: wrapperQuery });
 };
 
 onMounted(() => {
     setFilters();
-})
+});
 </script>
 
 <style lang="scss" scoped>
@@ -305,6 +353,17 @@ onMounted(() => {
         min-width: 300px;
         .content__row {
             margin-bottom: 30px;
+
+            .custom__price {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .app__input {
+                    width: 45%;
+                    height: 44px;
+                }
+            }
 
             @media (max-width: 991px) {
                 flex: 0 0 100%;

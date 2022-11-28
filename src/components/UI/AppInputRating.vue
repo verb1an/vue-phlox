@@ -30,7 +30,7 @@ export default {
 <script setup>
 import { ref, onMounted } from 'vue';
 const props = defineProps({
-    modelValue: { type: Number, default: 0},
+    modelValue: { type: [Number, String], default: 0},
     readonly: {type: Boolean, default: false}
 });
 const emit  = defineEmits(["update:modelValue"])

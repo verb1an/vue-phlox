@@ -1,4 +1,5 @@
 <template>
+    <app-s-breadcrumbs :breadcrumbs="breadcrumbs" />
     <div class="section__content">
         <section class="section about">
             <div class="content">
@@ -38,7 +39,12 @@
 </template>
 
 <script setup>
-
+const breadcrumbs = [
+    {
+        title: "About Us",
+        path: "/about-us/"
+    }
+]
 </script>
 
 <style lang="scss" scoped>

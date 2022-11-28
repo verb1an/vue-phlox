@@ -38,7 +38,7 @@ export default {
 <script setup>
 const props = defineProps({
     modelValue: {
-        type: Number,
+        type: [Number, String],
         default: 0,
     },
     max: Number,
