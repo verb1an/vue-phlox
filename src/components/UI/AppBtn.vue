@@ -151,6 +151,10 @@ defineProps({
         background-color: vars.$color-app-bg-gray;
     }
 
+    &.bgc-secondary{
+        background-color: vars.$color-g-secondary;
+    }
+
     // <!-- * Buttons text colors -->
     &.color-primary {
         color: vars.$color-g-primary;

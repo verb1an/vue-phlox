@@ -11,7 +11,7 @@
                 </div>
                 <ul v-if="$props.menu" class="">
                     <li v-for="(value, index) in menu" :key="index" :class="value.hide ? 'hide' : ''">
-                        <a v-if="multyMenu" class="menu__multy_item" >
+                        <a v-if="multyMenu" class="menu__multy_item">
                             <input
                                 type="checkbox"
                                 name="filters__price_input"
@@ -24,14 +24,21 @@
                                 {{ value.title }}
                             </label>
                         </a>
-                        <router-link v-else :to="value.path">{{ value.title }}</router-link>
+                        <router-link v-else-if="!value.subbed" :to="value.path" class="menu__item">{{ value.title }}</router-link>
+                        <div v-if="value.sub && value.sub.length > 0" class="sub__menu">
+                            <router-link
+                                v-for="subitem in value.sub"
+                                :to="menu.find((item) => item.id === subitem).path"
+                                :key="subitem"
+                                >{{ menu.find((item) => item.id === subitem).title }}</router-link
+                            >
+                        </div>
                     </li>
                 </ul>
                 <div v-if="$slots.content" class="content">
                     <slot name="content"></slot>
                 </div>
             </div>
-            
         </div>
     </nav>
 </template>
@@ -44,12 +51,12 @@ export default {
 
 <script setup>
 const props = defineProps({
-    title: {type: String, required: true},
+    title: { type: String, required: true },
     menu: Array,
     multyMenu: { type: Boolean, default: false },
     queryType: String,
 });
-const emit = defineEmits(["filters:change"])
+const emit = defineEmits(["filters:change"]);
 
 const showHideMenu = (event) => {
     const targetElement = event.target.closest(".component").children[0].children[1];
@@ -67,11 +74,10 @@ const showHideMenu = (event) => {
 const changeFilterValue = (event) => {
     emit("filters:change", {
         queryType: props.queryType,
-        index: event.target.getAttribute('data-index'),
-        value: event.target.checked
-    })
-}
-
+        index: event.target.getAttribute("data-index"),
+        value: event.target.checked,
+    });
+};
 </script>
 
 <style lang="scss" scoped>
@@ -96,6 +102,7 @@ const changeFilterValue = (event) => {
         ul {
             list-style: none;
             li {
+                position: relative;
                 a {
                     display: block;
                     font-size: 16px;
@@ -118,10 +125,35 @@ const changeFilterValue = (event) => {
                     }
                 }
 
+                .sub__menu {
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    transform: translate(100%, 20px);
+                    overflow: hidden;
+                    opacity: 0;
+                    transition: transform 0.12s ease-in-out, opacity 0.12s ease-in-out;
+                    background-color: rgb(243, 243, 243);
+                    padding: 0;
+                    z-index: 100;
+                    width: 0;
+
+                    a:hover {
+                        color: vars.$color-g-primary;
+                    }
+                }
+
                 &:hover {
-                    a {
+                    .menu__item {
+                        position: relative;
                         color: vars.$color-g-primary;
                         background-color: rgba(0, 0, 0, 0.1);
+                    }
+                    .sub__menu {
+                        opacity: 1;
+                        padding: 10px 30px;
+                        transform: translate(100%, 0);
+                        width: 100%;
                     }
                 }
 
@@ -142,6 +174,7 @@ const changeFilterValue = (event) => {
             &._show {
                 height: auto;
                 opacity: 1;
+                overflow: visible;
             }
         }
     }

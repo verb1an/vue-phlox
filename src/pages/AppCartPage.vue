@@ -49,6 +49,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div v-else class="content__row" >
                     <div class="cart__empty">
                         <div class="title">
@@ -60,6 +61,13 @@
                         </app-ui-btn>
                     </div>
                 </div>
+
+                <div class="content__row">
+                    <div v-if="$store.getters['appCart/GET_REMOVED_ITEM_READY']" class="returned__button">
+                        <app-ui-btn :background="'fill-bgc'" :hover="'primary'" @click="$store.dispatch('appCart/RETURN_REMOVED_ITEM')">Вернуть удаллёный товар</app-ui-btn>
+                    </div>
+                </div>
+                
             </div>
         </section>
         <section v-if="cartProducts.length" class="section total__amount">
@@ -83,7 +91,7 @@
                                 <span>{{ itemsQuantity }}</span> Products
                             </div>
                             <div class="price">
-                                <span class="total__sale">{{ totalSale }}$</span>
+                                <span class="total__sale" v-if="totalPrice !== totalSale">{{ totalSale }}$</span>
                                 <span class="total__price">{{ totalPrice }}$</span>
                             </div>
                         </div>

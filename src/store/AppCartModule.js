@@ -2,7 +2,8 @@ export const appCart = {
     namespaced: true,
     state: {
         status: true,
-        cart: []
+        cart: [],
+        removedItem: null
     },
     getters: {
         GET_CART(state) {
@@ -28,6 +29,9 @@ export const appCart = {
                 count += el.price_original * el.quantity;
             });
             return count;
+        },
+        GET_REMOVED_ITEM_READY(state) {
+            return Boolean(state.removedItem); 
         }
     },
     actions: {
@@ -48,7 +52,13 @@ export const appCart = {
                 if(el.id == productID) return String(index);
             } )
             
+            state.removedItem = state.cart[itemPos];
             state.cart.splice(itemPos, 1);
+        },
+        RETURN_REMOVED_ITEM({state}) {
+            if(!state.removedItem) return;
+            state.cart.push(state.removedItem);
+            state.removedItem = null;
         }
     }
 }

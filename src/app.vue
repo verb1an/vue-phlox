@@ -97,6 +97,8 @@ const closehelloPopap = () => {
     showHelloPopap.value = false;
     localStorage.setItem("showHelloPopap", false);
 };
+
+
 </script>
 
 <style lang="scss">

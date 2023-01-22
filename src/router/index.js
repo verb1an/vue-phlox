@@ -8,7 +8,7 @@ import BlogItemPage from '@/pages/AppBlogItemPage'
 import ContactPage from '@/pages/AppContactPage'
 import CartPage from '@/pages/AppCartPage'
 
-import ErrorPage from '@/pages/AppErrorPage'
+// import ErrorPage from '@/pages/AppErrorPage'
 
 const routes = [
     {
@@ -92,13 +92,13 @@ const routes = [
         }
     },
     // ! Need final
-    {
-        path: '/404/',
-        component: ErrorPage,
-    }, {
-        path:'/:pathMatch(.*)*',
-        redirect: "/404/"
-    }
+    // {
+    //     path: '/404/',
+    //     component: ErrorPage,
+    // }, {
+    //     path:'/:pathMatch(.*)*',
+    //     redirect: "/404/"
+    // }
 ]
 
 const router = createRouter({

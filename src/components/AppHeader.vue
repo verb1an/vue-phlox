@@ -71,6 +71,9 @@
                     <Suspense v-if="deviceWidth > 746">
                         <app-popap :show="showCartPopap" class="cart__popap _fade-down" :stopScroll="false">
                             <template #media>
+                                <div v-if="$store.getters['appCart/GET_REMOVED_ITEM_READY']" class="returned__button">
+                                    <app-ui-btn :background="'fill-bgc'" :hover="'primary'" @click="$store.dispatch('appCart/RETURN_REMOVED_ITEM')">Вернуть удаллёный товар</app-ui-btn>
+                                </div>
                                 <div class="cart" v-if="cartItems.length">
                                     <div class="items__wrapper">
                                         <transition-group>
@@ -374,7 +377,6 @@ router.beforeEach((to, from, next) => {
                     }
                 }
             }
-
             .subtotal {
                 text-align: left;
                 font-size: 15px;
@@ -396,6 +398,12 @@ router.beforeEach((to, from, next) => {
                     color: vars.$color-app-bg-gray;
                 }
             }
+        }
+
+        .returned__button {
+            display: block;
+            text-align: left;
+            padding: 20px 10px;
         }
 
         .cart__quantity {

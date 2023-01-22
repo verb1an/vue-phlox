@@ -399,10 +399,12 @@ export default {
 };
 </script>
 <script setup>
-import { onUpdated } from 'vue';
-onUpdated(() => {
-    console.log(123);
-})
+import { useStore } from 'vuex';
+
+const store = useStore();
+
+const catalog = store.getters['appCatalog/GET_CATALOG_BYPAGE'](null, 1, 8);
+
 </script>
 
 <style lang="scss" scoped>
